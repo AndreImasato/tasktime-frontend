@@ -1,4 +1,3 @@
-import './App.css';
 import Provider from 'react-redux/es/components/Provider';
 import axios from 'axios';
 import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
