@@ -49,7 +49,7 @@ const Page404 = () => {
               }}
             >
               <Typography variant="h6" color="textSecondary">
-                Clique para voltar para tela inicial
+                Clique para voltar para a tela inicial
               </Typography>
             </Link>
             <Typography 

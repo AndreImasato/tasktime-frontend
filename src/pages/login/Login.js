@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import {  Formik } from 'formik';
+import * as yup from 'yup';
+import { useDispatch } from 'react-redux';
 
 // MUI imports
 import { 
@@ -9,18 +12,36 @@ import {
   Box, 
   Typography,
   Container,
+  IconButton,
+  Icon,
+  InputAdornment
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+// Reducers
+import { submitLogin } from 'src/store/slices/auth/loginSlice';
+
 const theme = createTheme();
 
-const Login = (props) => {
-  const [showPassword, setShowPassword] = useState(false);
+const validationSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email("Digite um e-mail válido")
+    .required("Digite o e-mail"),
+  password: yup
+    .string()
+    .required("Digite a senha")
+});
 
-  const handleSubmit = () => {
-    console.log("Enviando");
-  }
+const initialValues = {
+  email: '',
+  password: ''
+}
+
+const Login = (props) => {
+  const dispatch = useDispatch();
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <ThemeProvider theme={theme}>
@@ -40,37 +61,71 @@ const Login = (props) => {
           <Typography component="h1" variant="h5">
             Entrar em TaskTime
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Endereço de E-Mail"
-              name="email"
-              autoFocus
-              autoComplete="email"
-              type="email"
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="password"
-              label="Senha"
-              name="password"
-              autoComplete="current-password"
-              type={showPassword ? "text" : "password"}
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+          
+            <Formik
+              initialValues={initialValues}
+              validationSchema={validationSchema}
+              onSubmit={(values) => {
+                dispatch(submitLogin(values));
+              }}
             >
-              Entrar
-            </Button>
-          </Box>
+              {({ errors, handleChange, handleBlur, handleSubmit, isValid, isDirty, values }) => (
+                <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    onChange={handleChange('email')}
+                    onBlur={handleBlur('email')}
+                    value={values.email}
+                    id="email"
+                    label="Endereço de E-Mail"
+                    name="email"
+                    autoFocus
+                    autoComplete="email"
+                    type="email"
+                    error={!!errors?.email}
+                    helperText={errors?.email}
+                  />
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    onChange={handleChange('password')}
+                    onBlur={handleBlur('password')}
+                    value={values.password}
+                    id="password"
+                    label="Senha"
+                    name="password"
+                    autoComplete="current-password"
+                    
+                    error={!!errors?.password}
+                    helperText={errors?.password}
+                    InputProps={{
+                      type: showPassword ? "text" : "password",
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton onClick={() => setShowPassword(!showPassword)} size="large">
+                            <Icon color="action">
+                              { showPassword ? 'visibility_off' : 'visibility' }
+                            </Icon>
+                          </IconButton>
+                        </InputAdornment>
+                      )
+                    }}
+                  />
+                  <Button
+                    disabled={!isValid || isDirty}
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                  >
+                    Entrar
+                  </Button>
+                </Box>
+              )}
+            </Formik>
         </Box>
       </Container>
     </ThemeProvider>
