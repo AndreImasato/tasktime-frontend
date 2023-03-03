@@ -59,6 +59,12 @@ class Auth extends Component {
       return Promise.resolve();
     })
   }
+
+  render() {
+    return this.state.isAuthChecking 
+      ? <>{/* //TODO CREATES A LOADING UI */}</>
+      : <>{this.props.children}</>
+  }
 }
 
 function mapDispatchToProps(dispatch){
