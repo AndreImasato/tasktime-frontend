@@ -21,6 +21,7 @@ export const submitLogin = ({ email, password }) => async (dispatch) => {
 
 const initialState = {
   success: false,
+  isLoggedIn: false,
 }
 
 const loginSlice = createSlice({

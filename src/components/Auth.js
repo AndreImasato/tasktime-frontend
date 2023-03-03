@@ -69,7 +69,7 @@ class Auth extends Component {
 
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
-
+    //TODO
   }, dispatch);
 }
 
