@@ -47,7 +47,6 @@ class JwtService extends Utils.EventEmitter {
     if (!access_token){
       return false;
     }
-    //TODO make a new request -> verify token from SimpleJWT
     return new Promise((resolve, reject) => {
       axios
         .post('/auth/verify-token/', {
