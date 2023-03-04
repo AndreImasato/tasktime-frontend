@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import JwtService from 'src/services/jwtService';
 
+import history from 'src/utils/@history';
+
 
 const jwtService = new JwtService();
 
@@ -8,14 +10,16 @@ export const submitLogin = ({ email, password }) => async (dispatch) => {
   return jwtService
     .signInWithEmailAndPassword(email, password)
     .then((data) => {
-      //TODO does something
-      return;
+      dispatch(loginSuccess());
+      history.push({
+        pathname: '/dashboards'
+      });
+      return ;
     })
-    .error((err) => {
+    .catch((err) => {
       console.error(err);
-      //TODO does something
       //TODO emits error message
-      return;
+      return dispatch(loginError());
     })
 }
 
@@ -30,9 +34,11 @@ const loginSlice = createSlice({
   reducers: {
     loginSuccess: (state, action) => {
       state.success = true;
+      state.isLoggedIn = true;
     },
     loginError: (state, action) => {
       state.success = false;
+      state.isLoggedIn = false;
     }
   },
   extraReducers: {},

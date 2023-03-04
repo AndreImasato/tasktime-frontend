@@ -5,6 +5,7 @@ import axios from 'axios';
 class JwtService extends Utils.EventEmitter {
   init() {
     this.setInterceptors();
+    this.handleAuthentication();
   }
 
   setInterceptors = () => {
@@ -22,6 +23,44 @@ class JwtService extends Utils.EventEmitter {
         });
       }
     );
+  }
+
+  handleAuthentication = () => {
+    const access_token = this._getAccessToken();
+
+    if (!access_token){
+      this.emit('onNoAccessToken');
+      return;
+    }
+
+    if (this.isAuthTokenValid(access_token)){
+      this.setSession(access_token);
+      this.emit('onAutoLogin', true);
+    } else {
+      this.setSession(null);
+      this.emit('onAutoLogout', 'access_token_expired');
+    }
+    
+  }
+
+  isAuthTokenValid = (access_token) => {
+    if (!access_token){
+      return false;
+    }
+    //TODO make a new request -> verify token from SimpleJWT
+    return new Promise((resolve, reject) => {
+      axios
+        .post('/auth/verify-token/', {
+          token: access_token
+        })
+        .then((response) => {
+          if (response.status === 200){
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        })
+    });
   }
 
   signInWithEmailAndPassword = (email, password) => {
@@ -43,8 +82,18 @@ class JwtService extends Utils.EventEmitter {
   }
 
   signInWithToken = () => {
-    //TODO
-    //TODO WIP BACKEND
+    return new Promise((resolve, reject) => {
+      axios
+        .post('/auth/login-token/')
+        .then((response) => {
+          if (response.status === 200){
+            //?this.setSession(response.data.access);
+            resolve(response.data);
+          } else {
+            reject(response);
+          }
+        })
+    })
   }
 
   setSession = (access_token) => {
@@ -59,6 +108,10 @@ class JwtService extends Utils.EventEmitter {
 
   logout = () => {
     this.setSession(null);
+  }
+  
+  _getAccessToken = () => {
+    return window.localStorage.getItem('jwt_access_token');
   }
 }
 

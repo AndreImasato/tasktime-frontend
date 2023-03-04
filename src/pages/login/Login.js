@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {  Formik } from 'formik';
 import * as yup from 'yup';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 // MUI imports
 import { 
@@ -41,7 +42,13 @@ const initialValues = {
 
 const Login = (props) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { isLoggedIn } = useSelector(({ auth }) => auth.login);
   const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    if (isLoggedIn) navigate({ pathname: '/dashboards' });
+  }, [isLoggedIn]);
 
   return (
     <ThemeProvider theme={theme}>

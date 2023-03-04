@@ -4,6 +4,10 @@ import { bindActionCreators } from '@reduxjs/toolkit';
 
 import { JwtService } from 'src/services';
 //TODO create redux actions
+import { logoutUser } from 'src/store/slices/auth/userSlice';
+import { loginSuccess, loginError } from 'src/store/slices/auth/loginSlice';
+
+import history from 'src/utils/@history';
 
 const jwtService = new JwtService();
 
@@ -14,7 +18,7 @@ class Auth extends Component {
 
   componentDidMount() {
     return Promise.all([
-      //TODO this.jwtCheck();
+      this.jwtCheck()
     ])
       .then(() => {
         this.setState({ isAuthChecking: false });
@@ -31,12 +35,16 @@ class Auth extends Component {
         jwtService
           .signInWithToken()
           .then(() => {
-            //TODO does something
+            this.props.loginSuccess();
+            history.push({
+              pathname: '/dashboards'
+            });
             resolve();
             //TODO emits success message
           })
           .catch((err) => {
             //TODO emits error message
+            this.props.loginError();
             reject(err);
           });
       });
@@ -50,9 +58,9 @@ class Auth extends Component {
         resolve();
       });
 
-      //?jwtService.on('onNoAccessToken', () => {
-      //?  resolve();
-      //?})
+      jwtService.on('onNoAccessToken', () => {
+        resolve();
+      });
 
       jwtService.init();
 
@@ -69,7 +77,9 @@ class Auth extends Component {
 
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
-    //TODO
+    logout: logoutUser,
+    loginSuccess: loginSuccess,
+    loginError: loginError,
   }, dispatch);
 }
 
