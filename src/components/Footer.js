@@ -20,7 +20,12 @@ const Footer = (props) => {
         height: "100%"
       }}
     >
-      <Copyright />
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+      >
+        <Copyright />
+      </motion.div>
     </Grid>
   )
 }
