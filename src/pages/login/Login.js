@@ -51,7 +51,7 @@ const Login = (props) => {
   }, [isLoggedIn]);
 
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -135,7 +135,7 @@ const Login = (props) => {
             </Formik>
         </Box>
       </Container>
-    </ThemeProvider>
+    </>
   )
 }
 

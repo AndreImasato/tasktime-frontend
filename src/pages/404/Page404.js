@@ -16,7 +16,7 @@ const theme = createTheme();
 
 const Page404 = () => {
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <Container component="main" maxWidth="md" disableGutters>
         <CssBaseline/>
         <Box
@@ -84,7 +84,7 @@ const Page404 = () => {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
+    </>
   )
 }
 
