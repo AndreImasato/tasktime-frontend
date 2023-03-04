@@ -1,9 +1,9 @@
 html, body {
-  height: max-content;
+  height: 100%;
 }
 
 div#root {
-  height: fit-content;
+  height: 100%;
 }
 
 body {

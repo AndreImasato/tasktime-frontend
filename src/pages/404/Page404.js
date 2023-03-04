@@ -11,8 +11,6 @@ import {
 } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-// Astronaut
-//<a href="https://www.freepik.com/free-vector/page-found-concept-illustration_7887410.htm#query=not%20found&position=13&from_view=search&track=ais">Image by storyset</a> on Freepik
 
 const theme = createTheme();
 

@@ -1,4 +1,3 @@
-//? IS THIS A HOOK OR HOC?
 import { injectReducer } from 'src/store/index';
 
 

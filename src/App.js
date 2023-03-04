@@ -21,6 +21,7 @@ function App() {
   return (
     <Provider store={store}>
       <Auth>
+        {/* //TODO Centralizes ThemeProvider */}
         <BrowserRouter history={history}>
           <Routes>
             <Route exact path="/" element={<Login/>} />
