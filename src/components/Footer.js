@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 // MUI imports
-import { Grid, Typography, Link } from '@mui/material';
+import { Grid } from '@mui/material';
 
 // Custom components
 import Copyright from 'src/components/Copyright';
