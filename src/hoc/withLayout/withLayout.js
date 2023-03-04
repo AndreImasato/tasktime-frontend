@@ -9,7 +9,7 @@ const theme = createTheme();
 const withLayout = (WrappedComponent) => {
   return (props) => {
     return (
-      <ThemeProvider theme={theme}>
+      <>
         <CssBaseline />
         <div
           style={{
@@ -42,7 +42,7 @@ const withLayout = (WrappedComponent) => {
             <Footer />
           </div>
         </div>
-      </ThemeProvider>
+      </>
     )
   }
 }
