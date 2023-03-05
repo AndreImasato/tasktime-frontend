@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 
 // MUI imports
 import { 
-  Grid,
   IconButton,
   Tooltip
 } from '@mui/material';
