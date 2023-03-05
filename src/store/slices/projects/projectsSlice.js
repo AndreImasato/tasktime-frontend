@@ -24,13 +24,27 @@ export const addProject = createAsyncThunk(
   }
 );
 
+export const patchProject = createAsyncThunk(
+  'tasktime/projects/patchProject',
+  async (payload) => {
+    const { public_id, data } = payload;
+    const response = await axios.patch(`/timer/projects/${public_id}/`, data);
+    if (response.status !== 200){
+      //TODO error message
+      return;
+    }
+    const responseData = await response.data;
+    return responseData;
+  }
+)
+
 export const removeProject = createAsyncThunk(
   'tasktime/projects/removeProject',
   async (payload) => {
     const { public_id } = payload;
     const response = await axios.patch(`/timer/projects/${public_id}/`, { is_active: false });
     if (response.status !== 200){
-      //TODO emit error
+      //TODO error message
       return;
     }
     return public_id;
@@ -69,6 +83,7 @@ const projectsSlice = createSlice({
     [getProjects.fulfilled]: projectsAdapter.setAll,
     [addProject.fulfilled]: projectsAdapter.addOne,
     [removeProject.fulfilled]: projectsAdapter.removeOne,
+    [patchProject.fulfilled]: projectsAdapter.upsertOne,
   }
 });
 
