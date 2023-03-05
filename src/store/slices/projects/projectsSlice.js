@@ -16,19 +16,16 @@ export const addProject = createAsyncThunk(
   async (payload) => {
     const response = await axios.post('/timer/projects/', payload);
     const data = await response.data;
-    console.log(data)
-    if (data.status !== 200){
+    if (response.status !== 201){
       //TODO emit error
       return;
     }
     return data;
-    //TODO verify status code
-    //TODO returns newly created project
   }
 )
 
 const projectsAdapter = createEntityAdapter({
-  selectId: (project) => project.public_id
+  selectId: (project) => project.public_id,
 });
 
 export const { selectAll: selectProjects, selectEntityById: selectProjectById } = projectsAdapter.getSelectors((state) => state.tasktime.projects);
@@ -57,7 +54,7 @@ const projectsSlice = createSlice({
   },
   extraReducers: {
     [getProjects.fulfilled]: projectsAdapter.setAll,
-    [addProject.fulfilled]: projectsAdapter.addOne
+    [addProject.fulfilled]: projectsAdapter.addOne,
   }
 });
 
