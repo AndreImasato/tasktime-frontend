@@ -17,7 +17,8 @@ import reducer from 'src/store/slices/projects';
 import { 
   ProjectSearchBar,
   ProjectsList,
-  ProjectAddButton
+  ProjectAddButton,
+  ProjectDialog
 } from 'src/components/tasktime/projects';
 
 // Reducers
@@ -54,6 +55,7 @@ const Projects = (props) => {
         <ProjectsList />
       </Grid>
       {/* //TODO ProjectRegisterModal */}
+      <ProjectDialog />
     </div>
   )
 }

@@ -36,7 +36,6 @@ const projectsSlice = createSlice({
     },
     setIsModalOpen: {
       reducer: (state, action) => {
-        console.log(action);
         state.isModalOpen = action.payload;
       }
     },
