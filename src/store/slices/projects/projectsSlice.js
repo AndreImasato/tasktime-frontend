@@ -11,6 +11,22 @@ export const getProjects = createAsyncThunk(
   }
 );
 
+export const addProject = createAsyncThunk(
+  'tasktime/projects/addProject',
+  async (payload) => {
+    const response = await axios.post('/timer/projects/', payload);
+    const data = await response.data;
+    console.log(data)
+    if (data.status !== 200){
+      //TODO emit error
+      return;
+    }
+    return data;
+    //TODO verify status code
+    //TODO returns newly created project
+  }
+)
+
 const projectsAdapter = createEntityAdapter({
   selectId: (project) => project.public_id
 });
@@ -20,7 +36,6 @@ export const { selectAll: selectProjects, selectEntityById: selectProjectById } 
 const initialState = {
   searchText: '',
   isModalOpen: false,
-  isEditing: false,
 };
 
 const projectsSlice = createSlice({
@@ -39,22 +54,16 @@ const projectsSlice = createSlice({
         state.isModalOpen = action.payload;
       }
     },
-    setIsEditing: {
-      reducer: (state, action) => {
-        console.log(action);
-        state.isEditing = action.payload;
-      }
-    }
   },
   extraReducers: {
     [getProjects.fulfilled]: projectsAdapter.setAll,
+    [addProject.fulfilled]: projectsAdapter.addOne
   }
 });
 
 export const {
   setProjectSearchText,
   setIsModalOpen,
-  setIsEditing,
 } = projectsSlice.actions;
 
 export default projectsSlice.reducer;
