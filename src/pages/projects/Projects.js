@@ -4,10 +4,7 @@ import { useDispatch } from 'react-redux';
 // MUI imports
 import { 
   Grid,
-  IconButton,
-  Tooltip
 } from '@mui/material';
-import AddCircleIcon from '@mui/icons-material/AddCircle'
 
 import withLayout from 'src/hoc/withLayout';
 import withReducer from 'src/hoc/withReducer';
@@ -51,7 +48,6 @@ const Projects = (props) => {
       <Grid container>
         <ProjectsList />
       </Grid>
-      {/* //TODO ProjectRegisterModal */}
       <ProjectDialog />
     </div>
   )
