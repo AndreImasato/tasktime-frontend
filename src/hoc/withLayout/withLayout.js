@@ -1,10 +1,7 @@
 // MUI imports
-import { CssBaseline } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { CssBaseline, Box } from '@mui/material';
 
 import { Header, Footer } from 'src/components';
-
-const theme = createTheme();
 
 const withLayout = (WrappedComponent) => {
   return (props) => {
@@ -32,7 +29,17 @@ const withLayout = (WrappedComponent) => {
               height: "85%"
             }}
           >
-            <WrappedComponent {...props} />
+            <Box
+              component="main"
+              sx={{
+                backgroundColor: (theme) => theme.palette.grey[100],
+                flexGrow: 1,
+                height: '100%',
+                overflow: 'auto'
+              }}
+            >
+              <WrappedComponent {...props} />
+            </Box>
           </div>
           <div
             style={{
