@@ -70,7 +70,6 @@ const ProjectForm = (props) => {
       innerRef={formikRef}
       onSubmit={(values) => {
         if (isEditing) {
-          //TODO case for when is editing form
           const payload = {
             public_id: params.projectId,
             data: values
@@ -124,7 +123,7 @@ const ProjectForm = (props) => {
             spacing={3}
             sx={{
               justifyContent: 'flex-end',
-              marginTop: 2,
+              marginTop: isEditing ? 1 : 2,
             }}
           >
             <Grid item>

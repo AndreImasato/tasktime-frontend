@@ -7,7 +7,8 @@ import reducer from 'src/store/slices/projects';
 
 // Custom components
 import {
-  ProjectForm
+  ProjectForm,
+  ProjectInformation
 } from 'src/components/tasktime/projects';
 
 
@@ -21,7 +22,7 @@ const Project = (props) => {
       }}
     >
       {/* //TODO project information edit */}
-      <ProjectForm />
+      <ProjectInformation />
       {/* //TODO task list */}
       {/* //TODO task add button */}
       {/* //TODO task add dialog */}
