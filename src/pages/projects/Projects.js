@@ -4,15 +4,10 @@ import { useDispatch } from 'react-redux';
 // MUI imports
 import { 
   Grid,
-  Toolbar,
-  Paper,
-  Typography,
-  TextField,
   IconButton,
-  InputAdornment,
-  Tooltip,
-  Box
-} from '@mui/material'
+  Tooltip
+} from '@mui/material';
+import AddCircleIcon from '@mui/icons-material/AddCircle'
 
 import withLayout from 'src/hoc/withLayout';
 import withReducer from 'src/hoc/withReducer';
@@ -21,7 +16,8 @@ import reducer from 'src/store/slices/projects';
 // Custom components
 import { 
   ProjectSearchBar,
-  ProjectsList
+  ProjectsList,
+  ProjectAddButton
 } from 'src/components/tasktime/projects';
 
 // Reducers
@@ -49,13 +45,15 @@ const Projects = (props) => {
         <ProjectSearchBar />
       </Grid>
       {/* Add Button */}
-      <Grid container>
-
-      </Grid>
+      {/* <Grid container>
+        <ProjectAddButton />
+      </Grid> */}
+      <ProjectAddButton />
       {/* ProjectsList */}
       <Grid container>
         <ProjectsList />
       </Grid>
+      {/* //TODO ProjectRegisterModal */}
     </div>
   )
 }
