@@ -1,5 +1,13 @@
 import React from 'react';
 
+// MUI imports
+import { 
+  Grid,
+  Paper,
+  TextField,
+  Divider
+} from '@mui/material';
+
 // Custom imports
 import withLayout from 'src/hoc/withLayout';
 import withReducer from 'src/hoc/withReducer';
@@ -7,9 +15,13 @@ import reducer from 'src/store/slices/projects';
 
 // Custom components
 import {
-  ProjectForm,
-  ProjectInformation
+  ProjectInformation,
 } from 'src/components/tasktime/projects';
+
+import { 
+  TaskAddButton,
+  TaskSearchBar
+} from 'src/components/tasktime/tasks'
 
 
 const Project = (props) => {
@@ -21,9 +33,24 @@ const Project = (props) => {
         marginRight: 100
       }}
     >
-      {/* //TODO project information edit */}
       <ProjectInformation />
       {/* //TODO task list */}
+      <Grid 
+        container
+        spacing={2}
+        sx={{
+          marginTop: 1,
+          height: 60,
+          alignItems: 'center'
+        }}
+      >
+        <Grid item xs={11} md={11} lg={11} sx={{ height: "100%" }}>
+          <TaskSearchBar />
+        </Grid>
+        <Grid item xs={1} md={1} lg={1}>
+          <TaskAddButton />
+        </Grid>
+      </Grid>
       {/* //TODO task add button */}
       {/* //TODO task add dialog */}
     </div>
