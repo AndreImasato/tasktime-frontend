@@ -22,6 +22,19 @@ export const addProject = createAsyncThunk(
     }
     return data;
   }
+);
+
+export const removeProject = createAsyncThunk(
+  'tasktime/projects/removeProject',
+  async (payload) => {
+    const { public_id } = payload;
+    const response = await axios.patch(`/timer/projects/${public_id}/`, { is_active: false });
+    if (response.status !== 200){
+      //TODO emit error
+      return;
+    }
+    return public_id;
+  }
 )
 
 const projectsAdapter = createEntityAdapter({
@@ -55,6 +68,7 @@ const projectsSlice = createSlice({
   extraReducers: {
     [getProjects.fulfilled]: projectsAdapter.setAll,
     [addProject.fulfilled]: projectsAdapter.addOne,
+    [removeProject.fulfilled]: projectsAdapter.removeOne,
   }
 });
 

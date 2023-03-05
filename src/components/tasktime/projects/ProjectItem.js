@@ -1,5 +1,5 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom'
 
@@ -16,9 +16,23 @@ import {
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
+// Custom components
+import ConfirmationDialog from 'src/components/ui/ConfirmationDialog';
+
+// Reducers
+import { removeProject } from 'src/store/slices/projects/projectsSlice';
+
 const ProjectItem = (props) => {
   const { project } = props;
+
+  const [ openDialog, setOpenDialog ] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleConfirmDialog = () => {
+    dispatch(removeProject({ public_id: project.public_id }));
+    setOpenDialog(false);
+  }
 
   return (
     <Grid item xs={2} md={4} sm={4}>
@@ -32,7 +46,7 @@ const ProjectItem = (props) => {
             action={
               <IconButton
                 onClick={() => {
-                  console.log(`Deletando ${project.public_id}`)
+                  setOpenDialog(true);
                 }}
               >
                 <DeleteForeverIcon
@@ -79,6 +93,15 @@ const ProjectItem = (props) => {
           </CardActions>
         </Card>
       </motion.div>
+      <ConfirmationDialog
+        title="Remover Projeto"
+        description="Deseja realmente remover o projeto?"
+        cancelLabel="Cancelar"
+        confirmLabel="Remover"
+        handleCancelClick={() => setOpenDialog(false)}
+        handleConfirmClick={handleConfirmDialog}
+        open={openDialog}
+      />
     </Grid>
   )
 }

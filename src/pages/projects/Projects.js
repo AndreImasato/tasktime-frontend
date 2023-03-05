@@ -46,9 +46,6 @@ const Projects = (props) => {
         <ProjectSearchBar />
       </Grid>
       {/* Add Button */}
-      {/* <Grid container>
-        <ProjectAddButton />
-      </Grid> */}
       <ProjectAddButton />
       {/* ProjectsList */}
       <Grid container>
