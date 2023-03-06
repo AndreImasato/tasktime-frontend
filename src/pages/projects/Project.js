@@ -33,7 +33,6 @@ const Project = (props) => {
       }}
     >
       <ProjectInformation />
-      {/* //TODO task list */}
       <Grid 
         container
         spacing={2}
@@ -53,7 +52,6 @@ const Project = (props) => {
       <Grid container sx={{ marginTop: 3 }}>
         <TaskList />
       </Grid>
-      {/* //TODO task add dialog */}
       <TaskDialog />
     </div>
   )
