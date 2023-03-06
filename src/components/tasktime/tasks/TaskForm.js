@@ -11,71 +11,52 @@ import {
   Box,
   TextField,
   Grid,
-} from '@mui/material'
+} from '@mui/material';
 
 // Reducer imports
-import { setIsModalOpen, addProject, selectProjects, patchProject } from 'src/store/slices/projects/projectsSlice';
+import { setIsModalOpen, addTask, selectAllTasks, patchTask } from 'src/store/slices/projects/tasksSlice';
+import { selectProjectById } from 'src/store/slices/projects/projectsSlice';
 
 
 const validationSchema = yup.object().shape({
   name: yup
     .string()
-    .max(50, "Máximo de 50 caracteres")
-    .required("Campo Obrigatório: Informe o nome do projeto"),
+    .max(100, "Máximo de 100 caracteres")
+    .required("Campo Obrigatório: Informe o nome da tarefa!"),
   description: yup
     .string()
 });
 
-const ProjectForm = (props) => {
+const initialValues = {
+  name: '',
+  description: ''
+}
+
+const TaskForm = (props) => {
   const dispatch = useDispatch();
   const formikRef = useRef();
   const params = useParams();
-  const projects = useSelector(selectProjects);
+  const project = useSelector((state) => selectProjectById(state, params.projectId));
+
   const [ isEditing, setIsEditing ] = useState(false);
-  const [ initialValues, setInitialValues ] = useState({
-    name: '',
-    description: ''
-  })
 
-  useEffect(() => {
-    if (params.projectId){
-      setIsEditing(true);
-      const project = _.filter(projects, (proj) => {
-        return proj.public_id === params.projectId
-      })[0];
-      if (project) {
-        setInitialValues({
-          name: project.name,
-          description: project.description
-        });
-        if (formikRef){
-          formikRef.current.setFieldValue('name', project.name);
-          formikRef.current.setFieldValue('description', project.description);
-        }
-      }
-    } else {
-      setIsEditing(false);
-    }
-  }, []);
-
+  //TODO useEffect => detects if there is a taskId parameter
+  
   const handleCancelClick = () => {
     dispatch(setIsModalOpen(false));
   }
-
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
       innerRef={formikRef}
       onSubmit={(values) => {
-        if (isEditing) {
-          const payload = {
-            public_id: params.projectId,
-            data: values
-          };
-          dispatch(patchProject(payload));
+        if (isEditing){
+          //TODO
         } else {
-          dispatch(addProject(values));
+          const payload = values;
+          payload['project'] = project.id;
+          dispatch(addTask(values));
           dispatch(setIsModalOpen(false));
         }
       }}
@@ -97,7 +78,7 @@ const ProjectForm = (props) => {
             error={!!errors?.name}
             helperText={errors?.name}
             variant="standard"
-            label="Nome do projeto"
+            label="Nome da tarefa"
             size="small"
             margin="normal"
           />
@@ -154,8 +135,9 @@ const ProjectForm = (props) => {
           </Grid>
         </Box>
       )}
+
     </Formik>
   )
 }
 
-export default ProjectForm;
+export default TaskForm;

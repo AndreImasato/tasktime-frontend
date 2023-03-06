@@ -1,4 +1,4 @@
-import { Projects } from 'src/pages/projects';
+import { Projects, Project } from 'src/pages/projects';
 
 const projectsRoutes = [
   {
@@ -6,6 +6,11 @@ const projectsRoutes = [
     component: <Projects />,
     protected: true,
   },
+  {
+    path: '/project/:projectId',
+    component: <Project />,
+    protected: true,
+  }
 ]
 
 export default projectsRoutes;

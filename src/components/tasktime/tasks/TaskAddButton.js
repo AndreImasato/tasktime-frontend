@@ -10,24 +10,22 @@ import {
 import AddIcon from '@mui/icons-material/Add'
 
 // Reducers imports
-import { setIsModalOpen } from 'src/store/slices/projects/projectsSlice';
+import { setIsModalOpen } from 'src/store/slices/projects/tasksSlice';
 
-const ProjectAddButton = (props) => {
+const TaskAddButton = (props) => {
   const dispatch = useDispatch();
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
     >
-      <Tooltip title="Adicionar novo projeto">
+      <Tooltip title="Adicionar nova tarefa">
         <IconButton
           onClick={() => {
             dispatch(setIsModalOpen(true));
           }}
           sx={{
-            position: "absolute",
-            right: 100,
-            bottom: 100,
             backgroundColor: (theme) => theme.palette.primary.main,
             '&:hover': {
               backgroundColor: (theme) => theme.palette.primary.light
@@ -37,8 +35,8 @@ const ProjectAddButton = (props) => {
         >
           <AddIcon
             sx={{
-              fontSize: 45,
-              color: 'white',
+              fontSize: 32,
+              color: (theme) => theme.palette.primary.contrastText
             }}
           />
         </IconButton>
@@ -47,4 +45,4 @@ const ProjectAddButton = (props) => {
   )
 }
 
-export default ProjectAddButton;
+export default TaskAddButton;

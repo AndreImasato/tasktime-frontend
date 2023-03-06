@@ -4,10 +4,7 @@ import { useDispatch } from 'react-redux';
 // MUI imports
 import { 
   Grid,
-  IconButton,
-  Tooltip
 } from '@mui/material';
-import AddCircleIcon from '@mui/icons-material/AddCircle'
 
 import withLayout from 'src/hoc/withLayout';
 import withReducer from 'src/hoc/withReducer';
@@ -22,13 +19,15 @@ import {
 } from 'src/components/tasktime/projects';
 
 // Reducers
-import { getProjects } from 'src/store/slices/projects/projectsSlice'
+import { getProjects } from 'src/store/slices/projects/projectsSlice';
+import { getTasks } from 'src/store/slices/projects/tasksSlice';
 
 const Projects = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getProjects());
+    dispatch(getTasks());
   }, []);
 
   return (
@@ -51,7 +50,6 @@ const Projects = (props) => {
       <Grid container>
         <ProjectsList />
       </Grid>
-      {/* //TODO ProjectRegisterModal */}
       <ProjectDialog />
     </div>
   )
