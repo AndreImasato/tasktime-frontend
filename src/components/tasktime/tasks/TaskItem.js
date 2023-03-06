@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import _ from 'lodash';
 
 // MUI imports
@@ -17,6 +17,7 @@ import LaunchIcon from '@mui/icons-material/Launch';
 const TaskItem = (props) => {
   const { task } = props;
   const navigate = useNavigate();
+  const params = useParams();
   return (
     <TableRow>
       <TableCell>
@@ -36,7 +37,7 @@ const TaskItem = (props) => {
             <Tooltip title="Visualizar tarefa">
               <IconButton
                 onClick={() => {
-                  navigate({ pathname: `/task/${task.public_id}` });
+                  navigate({ pathname: `project/${params.projectId}/task/${task.public_id}` });
                 }}
               >
                 <LaunchIcon />

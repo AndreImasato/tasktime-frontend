@@ -3,9 +3,6 @@ import React from 'react';
 // MUI imports
 import { 
   Grid,
-  Paper,
-  TextField,
-  Divider
 } from '@mui/material';
 
 // Custom imports
@@ -21,7 +18,8 @@ import {
 import { 
   TaskAddButton,
   TaskSearchBar,
-  TaskList
+  TaskList,
+  TaskDialog
 } from 'src/components/tasktime/tasks'
 
 
@@ -56,6 +54,7 @@ const Project = (props) => {
         <TaskList />
       </Grid>
       {/* //TODO task add dialog */}
+      <TaskDialog />
     </div>
   )
 }

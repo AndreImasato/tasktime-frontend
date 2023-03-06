@@ -41,7 +41,7 @@ const TaskList = (props) => {
       });
     }
 
-    if (project.tasks && project.tasks.length > 0){
+    if (project && project.tasks && project.tasks.length > 0){
       setFilteredData(getFilteredArray(project.tasks, searchText));
     }
   }, [project, searchText]);
