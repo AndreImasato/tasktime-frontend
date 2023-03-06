@@ -55,7 +55,7 @@ const TaskItem = (props) => {
             <Tooltip title="Visualizar tarefa">
               <IconButton
                 onClick={() => {
-                  navigate({ pathname: `project/${params.projectId}/task/${task.public_id}` });
+                  navigate({ pathname: `/project/${params.projectId}/task/${task.public_id}` });
                 }}
               >
                 <LaunchIcon />
