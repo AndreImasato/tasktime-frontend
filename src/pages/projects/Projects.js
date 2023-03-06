@@ -21,6 +21,7 @@ import {
 // Reducers
 import { getProjects } from 'src/store/slices/projects/projectsSlice';
 import { getTasks } from 'src/store/slices/projects/tasksSlice';
+import { getCycles } from 'src/store/slices/projects/cyclesSlice';
 
 const Projects = (props) => {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ const Projects = (props) => {
   useEffect(() => {
     dispatch(getProjects());
     dispatch(getTasks());
+    dispatch(getCycles());
   }, []);
 
   return (
