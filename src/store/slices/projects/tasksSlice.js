@@ -37,7 +37,7 @@ export const patchTask = createAsyncThunk(
   }
 )
 
-export const removeProject = createAsyncThunk(
+export const removeTask = createAsyncThunk(
   'tasktime/tasks/removeTask',
   async (payload) => {
     const { public_id } = payload;
@@ -86,7 +86,7 @@ const tasksSlice = createSlice({
   extraReducers: {
     [getTasks.fulfilled]: tasksAdapter.setAll,
     [addTask.fulfilled]: tasksAdapter.addOne,
-    [removeProject.fulfilled]: tasksAdapter.removeOne,
+    [removeTask.fulfilled]: tasksAdapter.removeOne,
     [patchTask.fulfilled]: tasksAdapter.upsertOne,
   }
 });
