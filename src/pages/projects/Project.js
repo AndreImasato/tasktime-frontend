@@ -20,7 +20,8 @@ import {
 
 import { 
   TaskAddButton,
-  TaskSearchBar
+  TaskSearchBar,
+  TaskList
 } from 'src/components/tasktime/tasks'
 
 
@@ -51,7 +52,9 @@ const Project = (props) => {
           <TaskAddButton />
         </Grid>
       </Grid>
-      {/* //TODO task add button */}
+      <Grid container sx={{ marginTop: 3 }}>
+        <TaskList />
+      </Grid>
       {/* //TODO task add dialog */}
     </div>
   )

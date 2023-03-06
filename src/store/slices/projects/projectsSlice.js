@@ -55,7 +55,7 @@ const projectsAdapter = createEntityAdapter({
   selectId: (project) => project.public_id,
 });
 
-export const { selectAll: selectProjects, selectEntityById: selectProjectById } = projectsAdapter.getSelectors((state) => state.tasktime.projects);
+export const { selectAll: selectProjects, selectById: selectProjectById } = projectsAdapter.getSelectors((state) => state.tasktime.projects);
 
 const initialState = {
   searchText: '',

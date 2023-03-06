@@ -16,7 +16,6 @@ import {
 // Reducer imports
 import { setIsModalOpen, addProject, selectProjects, patchProject } from 'src/store/slices/projects/projectsSlice';
 
-//TODO fields name (varchar); description (text)
 
 const validationSchema = yup.object().shape({
   name: yup
