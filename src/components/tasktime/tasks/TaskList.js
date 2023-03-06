@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import _ from 'lodash';
 
@@ -16,7 +16,8 @@ import {
 } from '@mui/material'
 
 // Reducer imports
-import { selectProjectById } from 'src/store/slices/projects/projectsSlice'
+import { selectProjectById } from 'src/store/slices/projects/projectsSlice';
+import { selectAllTasks } from 'src/store/slices/projects/tasksSlice';
 
 // Custom Imports
 import TaskItem from './TaskItem';
@@ -26,10 +27,18 @@ const TaskList = (props) => {
   const project = useSelector((state) => {
     return selectProjectById(state, params.projectId)
   });
+  const allTasks = useSelector(selectAllTasks);
   
   const { searchText } = useSelector(({ tasktime }) => tasktime.tasks);
   const [ filteredData, setFilteredData ] = useState([]);
   const [ totalParsedTime, setTotalParsedTime ] = useState('');
+  const [ tasks, setTasks ] = useState([]);
+
+  useEffect(() => {
+    if (allTasks && project){
+      setTasks(_.filter(allTasks, { project: project.id }));
+    }
+  }, [allTasks, project]);
 
   useEffect(() => {
     const getFilteredArray = (entities, _searchText) => {
@@ -41,10 +50,10 @@ const TaskList = (props) => {
       });
     }
 
-    if (project && project.tasks && project.tasks.length > 0){
-      setFilteredData(getFilteredArray(project.tasks, searchText));
+    if (tasks && tasks.length > 0){
+      setFilteredData(getFilteredArray(tasks, searchText));
     }
-  }, [project, searchText]);
+  }, [tasks, searchText]);
 
   useEffect(() => {
     if (filteredData.length > 0){
