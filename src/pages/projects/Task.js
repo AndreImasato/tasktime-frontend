@@ -13,7 +13,7 @@ import reducer from 'src/store/slices/projects';
 
 // Custom components
 import { TaskInformation } from 'src/components/tasktime/tasks';
-import { CycleForm, CycleAddButton } from 'src/components/tasktime/cycles';
+import { CycleForm, CycleAddButton, CycleList } from 'src/components/tasktime/cycles';
 
 const Task = (props) => {
   const { isAdding } = useSelector(({ tasktime }) => tasktime.cycles);
@@ -31,7 +31,8 @@ const Task = (props) => {
         sx={{
           justifyContent: 'flex-end',
           alignItems: 'center',
-          marginTop: 3
+          marginTop: 3,
+          marginBottom: 3
         }}
       >
         {isAdding 
@@ -40,6 +41,7 @@ const Task = (props) => {
         }
       </Grid>
       {/* //TODO cycles list */}
+      <CycleList />
       {/* //TODO total duration */}
     </div>
   )

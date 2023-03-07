@@ -53,6 +53,7 @@ const CycleForm = (props) => {
       onSubmit={(values) => {
         console.log("Prepares payload to be sent to backend")
         if (selectedCycle) {
+          //TODO patch the cycle
           console.log("Patching cycle");
         } else {
           const payload = {...values};
