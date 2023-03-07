@@ -1,4 +1,10 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+
+// MUI imports
+import { 
+  Grid,
+} from '@mui/material';
 
 // Custom imports
 import withLayout from 'src/hoc/withLayout';
@@ -7,8 +13,10 @@ import reducer from 'src/store/slices/projects';
 
 // Custom components
 import { TaskInformation } from 'src/components/tasktime/tasks';
+import { CycleForm, CycleAddButton } from 'src/components/tasktime/cycles';
 
 const Task = (props) => {
+  const { isAdding } = useSelector(({ tasktime }) => tasktime.cycles);
   return (
     <div
       style={{
@@ -17,9 +25,20 @@ const Task = (props) => {
         marginRight: 100
       }}
     >
-      {/* //TODO Task information accordion  */}
       <TaskInformation />
-      {/* //TODO add button + cycle form */}
+      <Grid 
+        container
+        sx={{
+          justifyContent: 'flex-end',
+          alignItems: 'center',
+          marginTop: 3
+        }}
+      >
+        {isAdding 
+          ? (<CycleForm />)
+          : (<CycleAddButton />)
+        }
+      </Grid>
       {/* //TODO cycles list */}
       {/* //TODO total duration */}
     </div>

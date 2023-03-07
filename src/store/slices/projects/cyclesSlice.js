@@ -11,6 +11,19 @@ export const getCycles = createAsyncThunk(
   }
 );
 
+export const addCycle = createAsyncThunk(
+  'tasktime/cycles/addCycle',
+  async (payload) => {
+    const response = await axios.post('/timer/cycles/', payload);
+    const data = await response.data;
+    if (response.status !== 201){
+      //TODO emit error
+      return;
+    }
+    return data;
+  }
+)
+
 
 const cyclesAdapter = createEntityAdapter({
   selectId: (cycle) => cycle.public_id,
@@ -24,6 +37,7 @@ export const {
 
 const initialState = {
   isAdding: false,
+  selectedCycle: null
 };
 
 const cyclesSlice = createSlice({
@@ -34,17 +48,24 @@ const cyclesSlice = createSlice({
   reducers: {
     setIsAdding: {
       reducer: (state, action) => {
-        state.searchText = action.payload;
+        state.isAdding = action.payload;
       },
     },
+    setSelectedCycle: {
+      reducer: (state, action) => {
+        state.selectedCycle = action.payload;
+      }
+    }
   },
   extraReducers: {
     [getCycles.fulfilled]: cyclesAdapter.setAll,
+    [addCycle.fulfilled]: cyclesAdapter.addOne,
   },
 });
 
 export const {
-
+  setIsAdding,
+  setSelectedCycle,
 } = cyclesSlice.actions;
 
 export default cyclesSlice.reducer;
