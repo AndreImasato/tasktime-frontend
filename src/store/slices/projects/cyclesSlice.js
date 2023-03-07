@@ -22,6 +22,20 @@ export const addCycle = createAsyncThunk(
     }
     return data;
   }
+);
+
+export const patchCycle = createAsyncThunk(
+  'tasktime/cycles/patchCycle',
+  async (payload) => {
+    const { public_id, data } = payload;
+    const response = await axios.patch(`/timer/cycles/${public_id}/`, data);
+    if (response.status !== 200){
+      //TODO emit error
+      return;
+    }
+    const responseData = await response.data;
+    return responseData;
+  }
 )
 
 
@@ -60,6 +74,7 @@ const cyclesSlice = createSlice({
   extraReducers: {
     [getCycles.fulfilled]: cyclesAdapter.setAll,
     [addCycle.fulfilled]: cyclesAdapter.addOne,
+    [patchCycle.fulfilled]: cyclesAdapter.upsertOne,
   },
 });
 

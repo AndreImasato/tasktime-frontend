@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { motion } from 'framer-motion';
@@ -23,7 +23,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 // Reducer imports
-import { setIsAdding, addCycle } from 'src/store/slices/projects/cyclesSlice';
+import { setIsAdding, addCycle, setSelectedCycle, patchCycle } from 'src/store/slices/projects/cyclesSlice';
 import { selectTaskById } from 'src/store/slices/projects/tasksSlice';
 
 const initialValues = {
@@ -44,23 +44,38 @@ const CycleForm = (props) => {
   const { selectedCycle } = useSelector(({ tasktime }) => tasktime.cycles);
   const params = useParams();
   const task = useSelector((state) => selectTaskById(state, params.taskId));
+  const formikRef = useRef();
+
+  useEffect(() => {
+    if (selectedCycle){
+      const dt_start = moment(new Date(selectedCycle.dt_start)).format('YYYY-MM-DD HH:mm');
+      const dt_end = moment(new Date(selectedCycle.dt_end)).format('YYYY-MM-DD HH:mm');
+      formikRef.current.setFieldValue('dt_start', dt_start);
+      formikRef.current.setFieldValue('dt_end', dt_end);
+    }
+  }, [selectedCycle]);
 
   return (
     <>
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
+      innerRef={formikRef}
       onSubmit={(values) => {
-        console.log("Prepares payload to be sent to backend")
         if (selectedCycle) {
           //TODO patch the cycle
-          console.log("Patching cycle");
+          const payload = {
+            public_id: selectedCycle.public_id,
+            data: {...values}
+          };
+          dispatch(patchCycle(payload));
         } else {
           const payload = {...values};
           payload['task'] = task.id;
           dispatch(addCycle(payload));
         }
         dispatch(setIsAdding(false));
+        dispatch(setSelectedCycle(null));
       }}
     >
       {({ errors, handleBlur, handleSubmit, values, setFieldValue, isValid, isDirty }) => (
@@ -95,9 +110,9 @@ const CycleForm = (props) => {
                     <MobileDateTimePicker
                       name="dt_end"
                       label="Data de término"
-                      value={moment(values.dt_end, 'YYYY-MM-DD HH:mm')}
+                      value={moment(values.dt_end, 'YYYY-MM-DD HH:mm').utcOffset('-03:00')}
                       onChange={(val) => {
-                        setFieldValue('dt_end', val.format('YYYY-MM-DD HH:mm'))
+                        setFieldValue('dt_end', val.utc().format('YYYY-MM-DD HH:mm'))
                       }}
                       minDateTime={moment(values.dt_start, 'YYYY-MM-DD HH:mm')}
                     />
@@ -119,6 +134,7 @@ const CycleForm = (props) => {
                 <IconButton
                   onClick={() => {
                     dispatch(setIsAdding(false));
+                    dispatch(setSelectedCycle(null));
                   }}
                 >
                   <HighlightOffIcon color="error" />

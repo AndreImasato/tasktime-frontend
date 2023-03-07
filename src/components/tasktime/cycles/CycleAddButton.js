@@ -11,7 +11,7 @@ import {
 import AddIcon from '@mui/icons-material/Add';
 
 // Reducer imports
-import { setIsAdding } from 'src/store/slices/projects/cyclesSlice';
+import { setIsAdding, setSelectedCycle } from 'src/store/slices/projects/cyclesSlice';
 
 const CycleAddButton = (props) => {
   const dispatch = useDispatch();
@@ -26,6 +26,7 @@ const CycleAddButton = (props) => {
           startIcon={<AddIcon />} 
           color="primary"
           onClick={() => {
+            dispatch(setSelectedCycle(null));
             dispatch(setIsAdding(true));
           }}
         >

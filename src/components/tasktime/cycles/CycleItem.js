@@ -13,7 +13,7 @@ import {
 import EditIcon from '@mui/icons-material/Edit';
 
 // Reducer imports
-import { setSelectedCycle } from 'src/store/slices/projects/cyclesSlice';
+import { setSelectedCycle, setIsAdding } from 'src/store/slices/projects/cyclesSlice';
 
 const CycleItem = (props) => {
   const { cycle } = props;
@@ -25,6 +25,7 @@ const CycleItem = (props) => {
         <IconButton 
           onClick={() => {
             dispatch(setSelectedCycle(cycle));
+            dispatch(setIsAdding(true));
           }}
         >
           <EditIcon color="warning" />
