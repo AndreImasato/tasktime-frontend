@@ -10,11 +10,9 @@ import "moment/locale/pt-br";
 // MUI imports
 import { 
   Grid,
-  Button,
   IconButton,
   Tooltip,
-  Box,
-  TextField
+  Paper
 } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
@@ -105,6 +103,9 @@ const CycleForm = (props) => {
                   component="form"
                   onSubmit={handleSubmit}
                   spacing={2}
+                  sx={{
+                    justifyContent: 'flex-end'
+                  }}
                 >
                   <Grid item>
                     <MobileDateTimePicker
@@ -112,6 +113,21 @@ const CycleForm = (props) => {
                       label="Data de início"
                       handleBlur={handleBlur('dt_start')}
                       value={moment(values.dt_start, 'YYYY-MM-DD HH:mm')}
+                      slotProps={{
+                        shortcuts: {
+                          items: [
+                            {
+                              label: "Agora",
+                              getValue: () => {
+                                return moment(new Date());
+                              }
+                            }
+                          ]
+                        }
+                      }}
+                      sx={{
+                        backgroundColor: (theme) => theme.palette.common.white,
+                      }}
                       onChange={(val) => {
                         setFieldValue('dt_start', val.format('YYYY-MM-DD HH:mm'))
                       }}
@@ -122,6 +138,21 @@ const CycleForm = (props) => {
                       name="dt_end"
                       label="Data de término"
                       value={moment(values.dt_end, 'YYYY-MM-DD HH:mm')}
+                      slotProps={{
+                        shortcuts: {
+                          items: [
+                            {
+                              label: "Agora",
+                              getValue: () => {
+                                return moment(new Date());
+                              }
+                            }
+                          ]
+                        }
+                      }}
+                      sx={{
+                        backgroundColor: (theme) => theme.palette.common.white,
+                      }}
                       onChange={(val) => {
                         setFieldValue('dt_end', val.format('YYYY-MM-DD HH:mm'))
                       }}
