@@ -28,7 +28,7 @@ import { selectTaskById } from 'src/store/slices/projects/tasksSlice';
 
 const initialValues = {
   'dt_start': moment(new Date()).format('YYYY-MM-DD HH:mm'),
-  'dt_end': moment(new Date()).add(1, 'hours').format('YYYY-MM-DD HH:mm'),
+  'dt_end': null,
 }
 
 const validationSchema = yup.object().shape({
@@ -37,6 +37,7 @@ const validationSchema = yup.object().shape({
     .required("Campo Obrigatório: Selecione a data de início"),
   dt_end: yup
     .string()
+    .nullable()
 });
 
 const CycleForm = (props) => {
@@ -48,10 +49,21 @@ const CycleForm = (props) => {
 
   useEffect(() => {
     if (selectedCycle){
-      const dt_start = moment(new Date(selectedCycle.dt_start)).format('YYYY-MM-DD HH:mm');
-      const dt_end = moment(new Date(selectedCycle.dt_end)).format('YYYY-MM-DD HH:mm');
-      formikRef.current.setFieldValue('dt_start', dt_start);
-      formikRef.current.setFieldValue('dt_end', dt_end);
+      formikRef.current.setFieldValue(
+        'dt_start',
+        moment(new Date(selectedCycle.dt_start)).format('YYYY-MM-DD HH:mm')
+      );
+      if (selectedCycle.dt_end){
+        formikRef.current.setFieldValue(
+          'dt_end',
+          moment(new Date(selectedCycle.dt_end)).format('YYYY-MM-DD HH:mm')
+        );
+      } else {
+        formikRef.current.setFieldValue(
+          'dt_end', 
+          null
+        );
+      }
     }
   }, [selectedCycle]);
 
@@ -63,7 +75,6 @@ const CycleForm = (props) => {
       innerRef={formikRef}
       onSubmit={(values) => {
         if (selectedCycle) {
-          //TODO patch the cycle
           const payload = {
             public_id: selectedCycle.public_id,
             data: {...values}

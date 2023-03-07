@@ -68,7 +68,7 @@ const CycleList = (props) => {
         <List
           sx={{
             width: '100%',
-            maxHeight: 120,
+            height: 240,
             overflowY: 'scroll'
           }}
         >

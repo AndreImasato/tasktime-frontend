@@ -34,7 +34,7 @@ const CycleItem = (props) => {
     >
       <ListItemText
         id={cycle.public_id}
-        primary={`Data Início: ${moment(cycle.dt_start).format("DD/MM/YYYY HH:mm:ss")} | Data Fim: ${moment(cycle.dt_end).format("DD/MM/YYYY HH:mm:ss")}`}
+        primary={`Data Início: ${moment(cycle.dt_start).format("DD/MM/YYYY HH:mm:ss")} | Data Fim: ${cycle.dt_end ? moment(cycle.dt_end).format("DD/MM/YYYY HH:mm:ss") : 'Indeterminado' }`}
         secondary={cycle.parsed_duration}
       />
 
