@@ -110,9 +110,9 @@ const CycleForm = (props) => {
                     <MobileDateTimePicker
                       name="dt_end"
                       label="Data de término"
-                      value={moment(values.dt_end, 'YYYY-MM-DD HH:mm').utcOffset('-03:00')}
+                      value={moment(values.dt_end, 'YYYY-MM-DD HH:mm')}
                       onChange={(val) => {
-                        setFieldValue('dt_end', val.utc().format('YYYY-MM-DD HH:mm'))
+                        setFieldValue('dt_end', val.format('YYYY-MM-DD HH:mm'))
                       }}
                       minDateTime={moment(values.dt_start, 'YYYY-MM-DD HH:mm')}
                     />

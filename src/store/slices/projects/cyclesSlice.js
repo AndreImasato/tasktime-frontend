@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, createEntityAdapter } from '@reduxjs/toolkit';
 import axios from 'axios';
+import moment from 'moment';
 
 
 export const getCycles = createAsyncThunk(
@@ -14,6 +15,13 @@ export const getCycles = createAsyncThunk(
 export const addCycle = createAsyncThunk(
   'tasktime/cycles/addCycle',
   async (payload) => {
+    Object.keys(payload).forEach(k => {
+      // Checks if it is a valid datetime string and not a number
+      if (isNaN(payload[k]) && moment(payload[k], 'YYYY-MM-DD HH:mm').isValid()){
+        payload[k] = moment.utc(moment(payload[k], 'YYYY-MM-DD HH:mm')).format()
+      }
+    });
+    console.log(payload);
     const response = await axios.post('/timer/cycles/', payload);
     const data = await response.data;
     if (response.status !== 201){
@@ -28,6 +36,9 @@ export const patchCycle = createAsyncThunk(
   'tasktime/cycles/patchCycle',
   async (payload) => {
     const { public_id, data } = payload;
+    Object.keys(data).forEach(k => {
+      data[k] = moment.utc(moment(data[k], 'YYYY-MM-DD HH:mm')).format()
+    });
     const response = await axios.patch(`/timer/cycles/${public_id}/`, data);
     if (response.status !== 200){
       //TODO emit error
