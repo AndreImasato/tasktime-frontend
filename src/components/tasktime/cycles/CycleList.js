@@ -9,6 +9,7 @@ import {
   Paper,
   Typography,
   List,
+  Divider
 } from '@mui/material';
 
 // Reducer imports
@@ -59,12 +60,14 @@ const CycleList = (props) => {
           component="h1"
           variant="h6"
           sx={{
-            marginTop: 1,
-            marginLeft: 2
+            marginTop: 2,
+            marginLeft: 2,
+            marginBottom: 2
           }}
         >
           Intervalos
         </Typography>
+        <Divider />
         <List
           sx={{
             width: '100%',
@@ -76,12 +79,15 @@ const CycleList = (props) => {
             <CycleItem key={cy.public_id} cycle={cy} />
           ))}
         </List>
+        <Divider variant="middle" />
         <Typography 
           sx={{
-            marginTop: 3
+            marginTop: 2,
+            marginBottom: 2,
+            marginLeft: 2
           }}
         >
-          Duração Total: {totalParsedTime}
+          Duração Total: <strong>{totalParsedTime}</strong>
         </Typography>
       </Paper>
     </motion.div>
