@@ -1,19 +1,23 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import moment from 'moment';
 
 // MUI imports
 import { 
   ListItem,
   ListItemIcon,
   ListItemButton,
+  Grid,
   ListItemText,
-  IconButton
+  IconButton,
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 
 // Reducer imports
 import { setSelectedCycle, setIsAdding } from 'src/store/slices/projects/cyclesSlice';
+
+// Custom imports
+import StyledDateTimeDisplay from 'src/components/ui/StyledDateTimeDisplay';
+
 
 const CycleItem = (props) => {
   const { cycle } = props;
@@ -32,12 +36,14 @@ const CycleItem = (props) => {
         </IconButton>
       }
     >
-      <ListItemText
-        id={cycle.public_id}
-        primary={`Data Início: ${moment(cycle.dt_start).format("DD/MM/YYYY HH:mm:ss")} | Data Fim: ${cycle.dt_end ? moment(cycle.dt_end).format("DD/MM/YYYY HH:mm:ss") : 'Indeterminado' }`}
-        secondary={cycle.parsed_duration}
-      />
-
+      <Grid container>
+        <Grid item container xs={6} md={6} xl={6} lg={6}>
+          <StyledDateTimeDisplay dateTimeObj={cycle.dt_start} />
+        </Grid>
+        <Grid item xs={6} md={6} xl={6} lg={6}>
+          <StyledDateTimeDisplay dateTimeObj={cycle.dt_end} />
+        </Grid>
+      </Grid>
     </ListItem>
   )
 }
