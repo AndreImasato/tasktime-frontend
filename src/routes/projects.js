@@ -4,15 +4,18 @@ const projectsRoutes = [
   {
     path: '/projects',
     component: <Projects />,
+    breadcrumb: 'Projetos',
     protected: true,
   },
   {
-    path: '/project/:projectId',
+    path: '/projects/:projectId',
+    breadcrumb: 'Detalhes Projeto',
     component: <Project />,
     protected: true,
   },
   {
-    path: '/project/:projectId/task/:taskId',
+    path: '/projects/:projectId/:taskId',
+    breadcrumb: 'Detalhes Tarefa',
     component: <Task />,
     protected: true,
   }
