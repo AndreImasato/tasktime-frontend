@@ -4,16 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 // MUI imports
 import { 
   ListItem,
-  ListItemIcon,
-  ListItemButton,
   Grid,
-  ListItemText,
   Typography,
   IconButton,
   Tooltip
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
-import { lightBlue } from '@mui/material/colors';
+import { lightBlue, yellow } from '@mui/material/colors';
+import { useTheme } from '@mui/material/styles';
 
 // Reducer imports
 import { setSelectedCycle, setIsAdding } from 'src/store/slices/projects/cyclesSlice';
@@ -25,21 +23,26 @@ import StyledDateTimeDisplay from 'src/components/ui/StyledDateTimeDisplay';
 const CycleItem = (props) => {
   const { cycle } = props;
   const dispatch = useDispatch();
+  const theme = useTheme();
   const { selectedCycle } = useSelector(({ tasktime }) => tasktime.cycles);
-  const [ active, setActive ] = useState(false);
+  const [ bgColor, setBgColor ] = useState(theme.palette.common.white);
 
   useEffect(() => {
     if (selectedCycle && selectedCycle.public_id === cycle.public_id){
-      setActive(true);
+      setBgColor(lightBlue[100]);
     } else {
-      setActive(false);
+      if (!!cycle.dt_end){
+        setBgColor(theme.palette.common.white);  
+      } else {
+        setBgColor(yellow[500]);
+      }
     }
-  }, [selectedCycle]);
+  }, [selectedCycle, cycle]);
 
   return (
     <ListItem
       sx={{ 
-        backgroundColor: active ? lightBlue[100] : (theme) => theme.palette.common.white
+        backgroundColor: bgColor
       }}
       secondaryAction={
         <Tooltip title="Editar intervalo">
