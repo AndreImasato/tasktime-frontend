@@ -77,7 +77,7 @@ const CycleList = (props) => {
           }}
         >
           {cycles.length > 0
-            ? cycles.map((cy, ix) => (
+            ? _.orderBy(cycles, (cy) => new Date(cy.dt_start), 'desc').map((cy, ix) => (
               <>
                 <CycleItem key={cy.public_id} cycle={cy} />
                 {ix+1 !== cycles.length ? <Divider /> : null}
