@@ -1,4 +1,4 @@
-import { Projects, Project } from 'src/pages/projects';
+import { Projects, Project, Task } from 'src/pages/projects';
 
 const projectsRoutes = [
   {
@@ -9,6 +9,11 @@ const projectsRoutes = [
   {
     path: '/project/:projectId',
     component: <Project />,
+    protected: true,
+  },
+  {
+    path: '/project/:projectId/task/:taskId',
+    component: <Task />,
     protected: true,
   }
 ]

@@ -66,7 +66,7 @@ const TaskList = (props) => {
       const seconds = hoursRemainder % 60;
       setTotalParsedTime(`${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2,'0')}`);
     } else {
-      setTotalParsedTime('00:00:00')
+      setTotalParsedTime('00:00:00');
     }
   }, [filteredData]);
 

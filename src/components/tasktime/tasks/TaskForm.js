@@ -37,10 +37,25 @@ const TaskForm = (props) => {
   const formikRef = useRef();
   const params = useParams();
   const project = useSelector((state) => selectProjectById(state, params.projectId));
+  const allTasks = useSelector(selectAllTasks);
 
   const [ isEditing, setIsEditing ] = useState(false);
 
-  //TODO useEffect => detects if there is a taskId parameter
+  useEffect(() => {
+    if (params.taskId){
+      // is editing
+      setIsEditing(true);
+      const task = _.filter(allTasks, { public_id: params.taskId })[0];
+      if (task){ 
+        if (formikRef){
+          formikRef.current.setFieldValue('name', task.name);
+          formikRef.current.setFieldValue('description', task.description);
+        }
+      }
+    } else {
+      setIsEditing(false);
+    }
+  }, [params]);
   
   const handleCancelClick = () => {
     dispatch(setIsModalOpen(false));
@@ -52,7 +67,11 @@ const TaskForm = (props) => {
       innerRef={formikRef}
       onSubmit={(values) => {
         if (isEditing){
-          //TODO
+          const payload = {
+            public_id: params.taskId,
+            data: values,
+          }
+          dispatch(patchTask(payload));
         } else {
           const payload = values;
           payload['project'] = project.id;
