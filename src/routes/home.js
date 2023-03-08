@@ -4,6 +4,7 @@ const homeRoutes = [
   {
     path: '/dashboards',
     component: <Home/>,
+    name: 'Dashboards',
     protected: true
   }
 ];

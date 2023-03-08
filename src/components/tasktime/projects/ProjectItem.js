@@ -85,7 +85,7 @@ const ProjectItem = (props) => {
             <Button 
               size="small"
               onClick={() => {
-                navigate({ pathname: `/project/${project.public_id}` })
+                navigate({ pathname: `/projects/${project.public_id}` })
               }}
             >
               Detalhes
