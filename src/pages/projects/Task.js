@@ -40,9 +40,7 @@ const Task = (props) => {
           : (<CycleAddButton />)
         }
       </Grid>
-      {/* //TODO cycles list */}
       <CycleList />
-      {/* //TODO total duration */}
     </div>
   )
 }

@@ -49,11 +49,12 @@ const CycleList = (props) => {
     <motion.div
       initial={{ opacity: 0, scale: 0.6 }}
       animate={{ opacity: 1, scale: 1 }}
+      style={{ display: 'flex', justifyContent: 'center' }}
     >
       <Paper
         sx={{
-          width: '100%',
-          overflow: 'hidden'
+          width: '90%',
+          overflow: 'hidden',
         }}
       >
         <Typography
@@ -75,17 +76,24 @@ const CycleList = (props) => {
             overflowY: 'scroll'
           }}
         >
-          {cycles.map(cy => (
-            <CycleItem key={cy.public_id} cycle={cy} />
-          ))}
+          {cycles.length > 0
+            ? cycles.map((cy, ix) => (
+              <>
+                <CycleItem key={cy.public_id} cycle={cy} />
+                {ix+1 !== cycles.length ? <Divider /> : null}
+              </>
+            ))
+            : (<Typography textAlign="center" variant="h6">Nenhum intervalo registrado!</Typography>)
+          }
         </List>
         <Divider variant="middle" />
         <Typography 
           sx={{
             marginTop: 2,
             marginBottom: 2,
-            marginLeft: 2
+            marginRight: 2
           }}
+          textAlign="end"
         >
           Duração Total: <strong>{totalParsedTime}</strong>
         </Typography>
