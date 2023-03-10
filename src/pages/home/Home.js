@@ -11,6 +11,7 @@ import withLayout from 'src/hoc/withLayout';
 import withReducer from 'src/hoc/withReducer';
 import reducer from 'src/store/slices/dashboards';
 import { getRankings } from 'src/store/slices/dashboards/rankingsSlice';
+import { getOpenTasks } from 'src/store/slices/dashboards/openTasksSlice';
 
 // Custom imports
 import { RankingWidget, ActiveTasksWidget, HistogramWidget, LatestTasksWidget } from 'src/components/dashboards';
@@ -21,6 +22,7 @@ const Home = (props) => {
 
   useEffect(() => {
     dispatch(getRankings());
+    dispatch(getOpenTasks());
   }, []);
   return (
     <div
