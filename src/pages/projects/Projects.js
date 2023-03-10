@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 
 // MUI imports
 import { 
@@ -18,19 +17,7 @@ import {
   ProjectDialog
 } from 'src/components/tasktime/projects';
 
-// Reducers
-import { getProjects } from 'src/store/slices/projects/projectsSlice';
-import { getTasks } from 'src/store/slices/projects/tasksSlice';
-import { getCycles } from 'src/store/slices/projects/cyclesSlice';
-
 const Projects = (props) => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getProjects());
-    dispatch(getTasks());
-    dispatch(getCycles());
-  }, []);
 
   return (
     <div

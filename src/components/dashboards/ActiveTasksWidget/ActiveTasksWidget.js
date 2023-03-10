@@ -40,8 +40,7 @@ const ActiveTasksWidget = (props) => {
                     key={ot.public_id}
                   >
                     <CardContent>
-                      <Typography sx={{ fontSize: 14 }}>{ot.name}</Typography>
-                      <Typography sx={{ fontSize: 16 }}>{Utils.parseTimeIntervalToString(ot.duration)}</Typography>
+                      <Typography sx={{ fontSize: 16 }}>{ot.name}</Typography>
                     </CardContent>
                     <CardActions>
                       <Link

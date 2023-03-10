@@ -12,6 +12,9 @@ import withReducer from 'src/hoc/withReducer';
 import reducer from 'src/store/slices/dashboards';
 import { getRankings } from 'src/store/slices/dashboards/rankingsSlice';
 import { getOpenTasks } from 'src/store/slices/dashboards/openTasksSlice';
+import { getProjects } from 'src/store/slices/projects/projectsSlice';
+import { getTasks } from 'src/store/slices/projects/tasksSlice';
+import { getCycles } from 'src/store/slices/projects/cyclesSlice';
 
 // Custom imports
 import { RankingWidget, ActiveTasksWidget, HistogramWidget, LatestTasksWidget } from 'src/components/dashboards';
@@ -23,6 +26,9 @@ const Home = (props) => {
   useEffect(() => {
     dispatch(getRankings());
     dispatch(getOpenTasks());
+    dispatch(getProjects());
+    dispatch(getTasks());
+    dispatch(getCycles());
   }, []);
   return (
     <div
