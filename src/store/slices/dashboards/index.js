@@ -1,10 +1,10 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
-import dashboards from './dashboardsSlice';
+import rankings from './rankingsSlice';
 
 
-const dashboardsReducers = combineReducers({
-  dashboards,
+const rankingsReducers = combineReducers({
+  rankings,
 });
 
-export default dashboardsReducers;
+export default rankingsReducers;

@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk, createEntityAdapter } from '@reduxjs/too
 import axios from 'axios';
 
 export const getRankings = createAsyncThunk(
-  'tasktime/dashboards/getRankings',
+  'dashboards/rankings/getRankings',
   async () => {
     const response = await axios.get('/timer/duration-ranking/');
     const data = await response.data;
@@ -10,13 +10,12 @@ export const getRankings = createAsyncThunk(
   }
 );
 
-
 const initialState = {
   rankingData: {},
 }
 
-const dashboardsSlice = createSlice({
-  name: 'dashboards/dashboards',
+const rankingsSlice = createSlice({
+  name: 'dashboards/rankings',
   initialState: initialState,
   reducers: {},
   extraReducers: {
@@ -26,4 +25,4 @@ const dashboardsSlice = createSlice({
   },
 });
 
-export default dashboardsSlice.reducer;
+export default rankingsSlice.reducer;

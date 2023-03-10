@@ -10,7 +10,7 @@ import {
 import withLayout from 'src/hoc/withLayout';
 import withReducer from 'src/hoc/withReducer';
 import reducer from 'src/store/slices/dashboards';
-import { getRankings } from 'src/store/slices/dashboards/dashboardsSlice';
+import { getRankings } from 'src/store/slices/dashboards/rankingsSlice';
 
 // Custom imports
 import { RankingWidget, ActiveTasksWidget, HistogramWidget, LatestTasksWidget } from 'src/components/dashboards';
