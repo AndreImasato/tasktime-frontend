@@ -40,7 +40,7 @@ const Home = (props) => {
           <HistogramWidget />
         </Grid>
       </Grid>
-      <Grid container>
+      <Grid container spacing={2}>
         <Grid 
           item 
           container
