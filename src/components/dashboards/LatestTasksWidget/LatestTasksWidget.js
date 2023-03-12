@@ -45,7 +45,7 @@ const LatestTasksWidget = (props) => {
                     <TableRow>
                       <TableCell>Última modificação</TableCell>
                       <TableCell>Tarefa</TableCell>
-                      <TableCell>Visualizar</TableCell>
+                      <TableCell></TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>

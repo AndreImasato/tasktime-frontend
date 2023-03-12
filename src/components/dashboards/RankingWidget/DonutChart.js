@@ -42,7 +42,7 @@ const DonutChart = (props) => {
     }
   };
   return (
-    <div>
+    <div style={{ height: "100%" }}>
       <ReactApexChart
         options={options}
         series={series}

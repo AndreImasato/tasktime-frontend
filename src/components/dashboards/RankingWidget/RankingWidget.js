@@ -26,10 +26,11 @@ const TabPanel = (props) => {
       id={`full-width-tabpanel-${index}`}
       aria-labelledby={`full-width-tab-${index}`}
       {...rest}
+      style={{ height: "100%" }}
     >
       {value === index
         ? (
-          <Box sx={{ m: 2 }}>
+          <Box sx={{ m: 2, height: "100%" }}>
             {children}
           </Box>
         )
@@ -56,9 +57,9 @@ const RankingWidget = (props) => {
     >
       <Paper
         fullWidth
-        sx={{ width: '100%', padding: 2 }}
+        sx={{ width: '100%', padding: 2, height: 420 }}
       >
-        <Box>
+        <Box sx={{ height: "70%"  }}>
           <Tabs value={tab} onChange={handleChange} centered variant="fullWidth">
             <Tab label="Projetos" />
             <Tab label="Tarefas" />

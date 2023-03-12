@@ -28,7 +28,7 @@ const ActiveTasksWidget = (props) => {
       animate={{ opacity: 1, scale: 1 }}s
     >
       <Paper
-        sx={{ width: "100%", padding: 2 }}
+        sx={{ width: "100%", padding: 2, height: 420 }}
       >
         <Box>
           <Typography variant="h6">Tarefas Abertas</Typography>
