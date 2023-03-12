@@ -15,6 +15,7 @@ import { getOpenTasks } from 'src/store/slices/dashboards/openTasksSlice';
 import { getProjects } from 'src/store/slices/projects/projectsSlice';
 import { getTasks } from 'src/store/slices/projects/tasksSlice';
 import { getCycles } from 'src/store/slices/projects/cyclesSlice';
+import { getLatestTasks } from 'src/store/slices/dashboards/latestTasksSlice';
 
 // Custom imports
 import { RankingWidget, ActiveTasksWidget, HistogramWidget, LatestTasksWidget } from 'src/components/dashboards';
@@ -26,6 +27,7 @@ const Home = (props) => {
   useEffect(() => {
     dispatch(getRankings());
     dispatch(getOpenTasks());
+    dispatch(getLatestTasks())
     dispatch(getProjects());
     dispatch(getTasks());
     dispatch(getCycles());
