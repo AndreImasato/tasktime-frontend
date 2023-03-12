@@ -14,9 +14,7 @@ import {
   Tooltip,
   Paper
 } from '@mui/material';
-import { LocalizationProvider } from '@mui/x-date-pickers';
 import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
-import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
@@ -97,7 +95,6 @@ const CycleForm = (props) => {
               initial={{ x: 100 }}
               animate={{ x: 0 }}
             >
-              <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale="pt-br">
                 <Grid 
                   container 
                   component="form"
@@ -160,7 +157,6 @@ const CycleForm = (props) => {
                     />
                   </Grid>
                 </Grid>
-              </LocalizationProvider>
             </motion.div>
           </Grid>
           <Grid 
