@@ -16,6 +16,7 @@ import { getProjects } from 'src/store/slices/projects/projectsSlice';
 import { getTasks } from 'src/store/slices/projects/tasksSlice';
 import { getCycles } from 'src/store/slices/projects/cyclesSlice';
 import { getLatestTasks } from 'src/store/slices/dashboards/latestTasksSlice';
+import { getTimeSeries } from 'src/store/slices/dashboards/histogramSlice';
 
 // Custom imports
 import { RankingWidget, ActiveTasksWidget, HistogramWidget, LatestTasksWidget } from 'src/components/dashboards';
@@ -25,9 +26,10 @@ const Home = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(getTimeSeries());
     dispatch(getRankings());
     dispatch(getOpenTasks());
-    dispatch(getLatestTasks())
+    dispatch(getLatestTasks());
     dispatch(getProjects());
     dispatch(getTasks());
     dispatch(getCycles());
@@ -40,7 +42,7 @@ const Home = (props) => {
         marginTop: 10
       }}
     >
-      <Grid container>
+      <Grid container sx={{ marginBottom: 2 }}>
         <Grid 
           item 
           container
