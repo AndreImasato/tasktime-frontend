@@ -4,16 +4,10 @@ import _ from 'lodash';
 
 import { 
   Box,
-  Paper,
-  Card,
-  CardHeader,
-  CardContent,
   Typography,
-  CardActions,
-  Tabs,
-  Tab,
   Grid
 } from '@mui/material';
+import { red, green } from '@mui/material/colors'
 import TrendingDownIcon from '@mui/icons-material/TrendingDown';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 
@@ -27,9 +21,14 @@ const PeriodComparison = (props) => {
   useEffect(() => {
     if (!_.isEmpty(timeData[period])){
       const { additional_info: { current_value, last_value } } = timeData[period];
-      const newDiffNum = (current_value - last_value) / last_value;
-      const newDiffPerc = diffNum * 100;
-      const newIsGreater = diffNum > 0 ? true : false;
+      let newDiffNum;
+      if (!last_value || last_value === 0){
+        newDiffNum = 0;
+      } else {
+        newDiffNum = (current_value - last_value) / last_value;
+      }
+      const newDiffPerc = newDiffNum * 100;
+      const newIsGreater = newDiffNum > 0 ? true : false;
       setDiffNum(newDiffNum);
       setDiffPerc(newDiffPerc);
       setIsGreater(newIsGreater);
@@ -59,7 +58,7 @@ const PeriodComparison = (props) => {
         <Box
           sx={{
             borderRadius: "50%",
-            backgroundColor: (theme) => isGreater ? theme.palette.success.light : theme.palette.error.light,
+            backgroundColor: (theme) => isGreater ? green[100] : red[200],
             width: "2em",
             height: "2em",
             justifyContent: 'center',
@@ -70,12 +69,12 @@ const PeriodComparison = (props) => {
           {isGreater
             ? (<TrendingUpIcon 
               sx={{ 
-                color: (theme) => theme.palette.success.dark
+                color: (theme) => green[700]
               }}
             />)
             : (<TrendingDownIcon 
               sx={{
-                color: (theme) =>  theme.palette.error.dark
+                color: (theme) =>  red[700]
               }}
             />)
           }
