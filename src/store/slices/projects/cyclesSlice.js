@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk, createEntityAdapter } from '@reduxjs/toolkit';
 import axios from 'axios';
 import moment from 'moment';
+import { enqueueSnackbar } from 'notistack';
 
 
 export const getCycles = createAsyncThunk(
@@ -25,7 +26,18 @@ export const addCycle = createAsyncThunk(
     const response = await axios.post('/timer/cycles/', payload);
     const data = await response.data;
     if (response.status !== 201){
-      //TODO emit error
+      enqueueSnackbar(
+        'Erro ao adicionar intervalo',
+        {
+          variant: 'error',
+          autoHideDuration: 3000,
+          preventDuplicate: true,
+          anchorOrigin: {
+            horizontal: 'right',
+            vertical: 'top'
+          }
+        }
+      );
       return;
     }
     return data;
@@ -41,7 +53,18 @@ export const patchCycle = createAsyncThunk(
     });
     const response = await axios.patch(`/timer/cycles/${public_id}/`, data);
     if (response.status !== 200){
-      //TODO emit error
+      enqueueSnackbar(
+        'Erro ao atualizar o intervalo',
+        {
+          variant: 'error',
+          autoHideDuration: 3000,
+          preventDuplicate: true,
+          anchorOrigin: {
+            horizontal: 'right',
+            vertical: 'top'
+          }
+        }
+      );
       return;
     }
     const responseData = await response.data;

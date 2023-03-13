@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from '@reduxjs/toolkit';
+import { enqueueSnackbar } from 'notistack';
 
 import { JwtService } from 'src/services';
 //TODO create redux actions
@@ -28,7 +29,6 @@ class Auth extends Component {
   jwtCheck = () => {
     new Promise ((resolve) => {
       jwtService.on('onAutoLogin', () => {
-        //TODO emits info message
         /**
          * Signs in with token
          */
@@ -40,10 +40,32 @@ class Auth extends Component {
               pathname: '/dashboards'
             });
             resolve();
-            //TODO emits success message
+            enqueueSnackbar(
+              'Conectado com sucesso',
+              {
+                variant: 'success',
+                autoHideDuration: 3000,
+                preventDuplicate: true,
+                anchorOrigin: {
+                  horizontal: 'right',
+                  vertical: 'top'
+                }
+              },
+            );
           })
           .catch((err) => {
-            //TODO emits error message
+            enqueueSnackbar(
+              'Erro ao tentar efetuar o login',
+              {
+                variant: 'error',
+                autoHideDuration: 3000,
+                preventDuplicate: true,
+                anchorOrigin: {
+                  horizontal: 'right',
+                  vertical: 'top'
+                }
+              },
+            );
             this.props.loginError();
             reject(err);
           });
@@ -51,7 +73,18 @@ class Auth extends Component {
 
       jwtService.on('onAutoLoggout', (message) => {
         if (message){
-          //TODO emits info message
+          enqueueSnackbar(
+            message,
+            {
+              variant: 'info',
+              autoHideDuration: 3000,
+              preventDuplicate: true,
+              anchorOrigin: {
+                horizontal: 'right',
+                vertical: 'top'
+              }
+            },
+          );
         }
 
         this.props.logout();

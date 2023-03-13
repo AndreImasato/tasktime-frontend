@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, createEntityAdapter } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { enqueueSnackbar } from 'notistack';
 
 
 export const getProjects = createAsyncThunk(
@@ -17,7 +18,18 @@ export const addProject = createAsyncThunk(
     const response = await axios.post('/timer/projects/', payload);
     const data = await response.data;
     if (response.status !== 201){
-      //TODO emit error
+      enqueueSnackbar(
+        'Erro ao adicionar projeto',
+        {
+          variant: 'error',
+          autoHideDuration: 3000,
+          preventDuplicate: true,
+          anchorOrigin: {
+            horizontal: 'right',
+            vertical: 'top'
+          }
+        }
+      );
       return;
     }
     return data;
@@ -30,7 +42,18 @@ export const patchProject = createAsyncThunk(
     const { public_id, data } = payload;
     const response = await axios.patch(`/timer/projects/${public_id}/`, data);
     if (response.status !== 200){
-      //TODO error message
+      enqueueSnackbar(
+        'Erro ao atualizar projeto',
+        {
+          variant: 'error',
+          autoHideDuration: 3000,
+          preventDuplicate: true,
+          anchorOrigin: {
+            horizontal: 'right',
+            vertical: 'top'
+          }
+        }
+      )
       return;
     }
     const responseData = await response.data;
@@ -44,7 +67,18 @@ export const removeProject = createAsyncThunk(
     const { public_id } = payload;
     const response = await axios.patch(`/timer/projects/${public_id}/`, { is_active: false });
     if (response.status !== 200){
-      //TODO error message
+      enqueueSnackbar(
+        'Erro ao remover projeto',
+        {
+          variant: 'error',
+          autoHideDuration: 3000,
+          preventDuplicate: true,
+          anchorOrigin: {
+            horizontal: 'right',
+            vertical: 'top'
+          }
+        }
+      );
       return;
     }
     return public_id;

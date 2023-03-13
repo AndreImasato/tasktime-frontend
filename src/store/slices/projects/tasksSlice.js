@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, createEntityAdapter } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { enqueueSnackbar } from 'notistack';
 
 export const getTasks = createAsyncThunk(
   'tasktime/tasks/getTasks',
@@ -16,7 +17,18 @@ export const addTask = createAsyncThunk(
     const response = await axios.post('/timer/tasks/', payload);
     const data = await response.data;
     if (response.status !== 201){
-      //TODO emit error
+      enqueueSnackbar(
+        'Erro ao adicionar tarefa',
+        {
+          variant: 'error',
+          autoHideDuration: 3000,
+          preventDuplicate: true,
+          anchorOrigin: {
+            horizontal: 'right',
+            vertical: 'top'
+          }
+        },
+      );
       return;
     }
     return data;
@@ -29,7 +41,18 @@ export const patchTask = createAsyncThunk(
     const { public_id, data } = payload;
     const response = await axios.patch(`/timer/tasks/${public_id}/`, data);
     if (response.status !== 200){
-      //TODO emit error
+      enqueueSnackbar(
+        'Erro ao atualizar tarefa',
+        {
+          variant: 'error',
+          autoHideDuration: 3000,
+          preventDuplicate: true,
+          anchorOrigin: {
+            horizontal: 'right',
+            vertical: 'top'
+          }
+        }
+      );
       return;
     }
     const responseData = await response.data;
@@ -43,7 +66,18 @@ export const removeTask = createAsyncThunk(
     const { public_id } = payload;
     const response = await axios.patch(`/timer/tasks/${public_id}/`, { is_active: false });
     if (response.status !== 200){
-      //TODO emit error
+      enqueueSnackbar(
+        'Erro ao remover a tarefa',
+        {
+          variant: 'error',
+          autoHideDuration: 3000,
+          preventDuplicate: true,
+          anchorOrigin: {
+            horizontal: 'right',
+            vertical: 'top'
+          }
+        }
+      );
       return;
     }
     return public_id;
