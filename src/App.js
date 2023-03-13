@@ -1,8 +1,8 @@
 import Provider from 'react-redux/es/components/Provider';
 import axios from 'axios';
 import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
-import moment from 'moment';
 import "moment/locale/pt-br";
+import { SnackbarProvider } from 'notistack'
 
 // MUI Components
 import { ThemeProvider } from '@mui/material/styles';
@@ -28,32 +28,33 @@ axios.defaults.headers.common['Content-Type'] = 'application/json';
 function App() {
   return (
     <Provider store={store}>
-      <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale="pt-br">
-        <Auth>
-          {/* //TODO Centralizes ThemeProvider */}
-          <ThemeProvider theme={theme}>
-            <BrowserRouter history={history}>
-              <Routes>
-                <Route exact path="/" element={<Login/>} />
-                {pageRoutes.map((route, ix) =>
-                  <Route 
-                    key={ix}
-                    exact path={route.path}
-                    element={<ProtectedRoute/>}
-                  >
-                    <Route
+      <SnackbarProvider>
+        <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale="pt-br">
+          <Auth>
+            <ThemeProvider theme={theme}>
+              <BrowserRouter history={history}>
+                <Routes>
+                  <Route exact path="/" element={<Login/>} />
+                  {pageRoutes.map((route, ix) =>
+                    <Route 
+                      key={ix}
                       exact path={route.path}
-                      element={route.component}
-                    />
-                  </Route>
-                )}
-                <Route path="404" element={<Page404/>} />
-                <Route path="*" element={<Navigate to="404" />} />
-              </Routes>
-            </BrowserRouter>
-          </ThemeProvider>
-        </Auth>
-      </LocalizationProvider>
+                      element={<ProtectedRoute/>}
+                    >
+                      <Route
+                        exact path={route.path}
+                        element={route.component}
+                      />
+                    </Route>
+                  )}
+                  <Route path="404" element={<Page404/>} />
+                  <Route path="*" element={<Navigate to="404" />} />
+                </Routes>
+              </BrowserRouter>
+            </ThemeProvider>
+          </Auth>
+        </LocalizationProvider>
+      </SnackbarProvider>
     </Provider>
   );
 }

@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { enqueueSnackbar } from 'notistack';
 import JwtService from 'src/services/jwtService';
 
 import history from 'src/utils/@history';
@@ -18,7 +19,18 @@ export const submitLogin = ({ email, password }) => async (dispatch) => {
     })
     .catch((err) => {
       console.error(err);
-      //TODO emits error message
+      enqueueSnackbar(
+        "Erro ao tentar efetuar o login",
+        {
+          variant: 'error',
+          autoHideDuration: 2000,
+          preventDuplicate: true,
+          anchorOrigin: {
+            horizontal: 'right',
+            vertical: 'top'
+          }
+        }
+      );
       return dispatch(loginError());
     })
 }
