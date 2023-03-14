@@ -52,11 +52,11 @@ const Home = (props) => {
           <HistogramWidget />
         </Grid>
       </Grid>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} sx={{ marginBottom: 2 }}>
         <Grid 
           item 
           container
-          xs={4} md={4} lg={4}
+          xs={12} md={12} lg={4}
         >
           {/* Rankings */}
           <RankingWidget />
@@ -64,7 +64,7 @@ const Home = (props) => {
         <Grid 
           item 
           container
-          xs={4} md={4} lg={4}
+          xs={12} md={12} lg={4}
         >
           {/* Active Tasks */}
           <ActiveTasksWidget />
@@ -72,7 +72,7 @@ const Home = (props) => {
         <Grid 
           item 
           container
-          xs={4} md={4} lg={4}
+          xs={12} md={12} lg={4}
         >
           {/* Latest tasks */}
           <LatestTasksWidget />

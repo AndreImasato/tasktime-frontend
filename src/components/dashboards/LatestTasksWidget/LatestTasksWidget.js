@@ -39,11 +39,17 @@ const LatestTasksWidget = (props) => {
           </Typography>
           {latestTasks.length > 0
             ? (
-              <TableContainer>
+              <TableContainer
+                sx={{
+                  maxHeight: "30vh",
+                  overflowY: 'scroll',
+                  overflowX: 'hidden'
+                }}
+              >
                 <Table stickyHeader>
                   <TableHead>
                     <TableRow>
-                      <TableCell>Última modificação</TableCell>
+                      <TableCell sx={{ display: { lg: 'none', xl: 'table-cell' } }}>Última modificação</TableCell>
                       <TableCell>Tarefa</TableCell>
                       <TableCell></TableCell>
                     </TableRow>
@@ -51,7 +57,7 @@ const LatestTasksWidget = (props) => {
                   <TableBody>
                     {latestTasks.map((task) => (
                       <TableRow key={task.public_id}>
-                        <TableCell>{moment(new Date(task.last_modified_on)).format("DD/MM/YYYY")}</TableCell>
+                        <TableCell sx={{ display: { lg: 'none', xl: 'table-cell' } }}>{moment(new Date(task.last_modified_on)).format("DD/MM/YYYY")}</TableCell>
                         <TableCell>{task.name}</TableCell>
                         <TableCell>
                           <Link
