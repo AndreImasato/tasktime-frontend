@@ -35,7 +35,7 @@ const ProjectItem = (props) => {
   }
 
   return (
-    <Grid item xs={2} md={4} sm={4}>
+    <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
