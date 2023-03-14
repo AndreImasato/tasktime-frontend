@@ -67,18 +67,33 @@ export const patchCycle = createAsyncThunk(
     });
     const response = await axios.patch(`/timer/cycles/${public_id}/`, data);
     if (response.status !== 200){
-      enqueueSnackbar(
-        'Erro ao atualizar o intervalo',
-        {
-          variant: 'error',
-          autoHideDuration: 2000,
-          preventDuplicate: true,
-          anchorOrigin: {
-            horizontal: 'right',
-            vertical: 'top'
+      if (response.data.message){
+        enqueueSnackbar(
+          response.data.message,
+          {
+            variant: 'warning',
+            autoHideDuration: 2000,
+            preventDuplicate: true,
+            anchorOrigin: {
+              horizontal: 'right',
+              vertical: 'top'
+            }
           }
-        }
-      );
+        );
+      } else {
+        enqueueSnackbar(
+          'Erro ao adicionar intervalo',
+          {
+            variant: 'error',
+            autoHideDuration: 2000,
+            preventDuplicate: true,
+            anchorOrigin: {
+              horizontal: 'right',
+              vertical: 'top'
+            }
+          }
+        );
+      }
       return;
     }
     const responseData = await response.data;
