@@ -4,7 +4,6 @@ import { bindActionCreators } from '@reduxjs/toolkit';
 import { enqueueSnackbar } from 'notistack';
 
 import { JwtService } from 'src/services';
-//TODO create redux actions
 import { logoutUser } from 'src/store/slices/auth/userSlice';
 import { loginSuccess, loginError } from 'src/store/slices/auth/loginSlice';
 
