@@ -22,7 +22,7 @@ export const addProject = createAsyncThunk(
         'Erro ao adicionar projeto',
         {
           variant: 'error',
-          autoHideDuration: 3000,
+          autoHideDuration: 2000,
           preventDuplicate: true,
           anchorOrigin: {
             horizontal: 'right',
@@ -46,7 +46,7 @@ export const patchProject = createAsyncThunk(
         'Erro ao atualizar projeto',
         {
           variant: 'error',
-          autoHideDuration: 3000,
+          autoHideDuration: 2000,
           preventDuplicate: true,
           anchorOrigin: {
             horizontal: 'right',
@@ -71,7 +71,7 @@ export const removeProject = createAsyncThunk(
         'Erro ao remover projeto',
         {
           variant: 'error',
-          autoHideDuration: 3000,
+          autoHideDuration: 2000,
           preventDuplicate: true,
           anchorOrigin: {
             horizontal: 'right',

@@ -44,7 +44,7 @@ class Auth extends Component {
               'Conectado com sucesso',
               {
                 variant: 'success',
-                autoHideDuration: 3000,
+                autoHideDuration: 2000,
                 preventDuplicate: true,
                 anchorOrigin: {
                   horizontal: 'right',
@@ -58,7 +58,7 @@ class Auth extends Component {
               'Erro ao tentar efetuar o login',
               {
                 variant: 'error',
-                autoHideDuration: 3000,
+                autoHideDuration: 2000,
                 preventDuplicate: true,
                 anchorOrigin: {
                   horizontal: 'right',
@@ -77,7 +77,7 @@ class Auth extends Component {
             message,
             {
               variant: 'info',
-              autoHideDuration: 3000,
+              autoHideDuration: 2000,
               preventDuplicate: true,
               anchorOrigin: {
                 horizontal: 'right',

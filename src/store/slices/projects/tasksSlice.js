@@ -21,7 +21,7 @@ export const addTask = createAsyncThunk(
         'Erro ao adicionar tarefa',
         {
           variant: 'error',
-          autoHideDuration: 3000,
+          autoHideDuration: 2000,
           preventDuplicate: true,
           anchorOrigin: {
             horizontal: 'right',
@@ -45,7 +45,7 @@ export const patchTask = createAsyncThunk(
         'Erro ao atualizar tarefa',
         {
           variant: 'error',
-          autoHideDuration: 3000,
+          autoHideDuration: 2000,
           preventDuplicate: true,
           anchorOrigin: {
             horizontal: 'right',
@@ -70,7 +70,7 @@ export const removeTask = createAsyncThunk(
         'Erro ao remover a tarefa',
         {
           variant: 'error',
-          autoHideDuration: 3000,
+          autoHideDuration: 2000,
           preventDuplicate: true,
           anchorOrigin: {
             horizontal: 'right',
