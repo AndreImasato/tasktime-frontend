@@ -6,8 +6,7 @@ import _ from 'lodash';
 // MUI imports
 import { 
   Grid,
-  Paper,
-
+  Typography
 } from '@mui/material'
 
 // Reducers
@@ -48,9 +47,13 @@ const ProjectsList = (props) => {
           spacing={{ xs: 2, md: 3 }}
           column={{ xs: 4, sm: 8, md: 12 }}
         >
-          {filteredData.map(proj => (
-            <ProjectItem key={proj.public_id} project={proj} />
-          ))}
+          {filteredData.length === 0
+            ? (<Typography variant="h6" sx={{ textAlign: "center", color: (theme) => theme.palette.grey[600] }}>Nenhum projeto para ser exibido</Typography>)
+            : filteredData.map(proj => (
+              <ProjectItem key={proj.public_id} project={proj} />
+            ))
+          }
+          
         </Grid>
       </motion.div>
     </Grid>
