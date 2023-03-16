@@ -11,11 +11,14 @@ import {
   Toolbar,
   Tooltip,
   IconButton,
+  ListItemIcon,
+  ListItemText,
   Menu,
   MenuItem,
   Typography,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 // Reducers
 import { logoutUser } from 'src/store/slices/auth/userSlice';
@@ -127,7 +130,10 @@ const Header = (props) => {
             <MenuItem onClick={() => {
               dispatch(logoutUser());
             }}>
-              Sair + Icone de sair
+              <ListItemText>Sair</ListItemText>
+              <ListItemIcon sx={{ marginLeft: 1 }}>
+                <LogoutIcon fontSize='small' />
+              </ListItemIcon>
             </MenuItem>
           </Menu>
         </Box>
