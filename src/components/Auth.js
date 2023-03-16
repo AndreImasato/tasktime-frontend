@@ -26,7 +26,7 @@ class Auth extends Component {
   }
 
   jwtCheck = () => {
-    new Promise ((resolve) => {
+    new Promise ((resolve, reject) => {
       jwtService.on('onAutoLogin', () => {
         /**
          * Signs in with token

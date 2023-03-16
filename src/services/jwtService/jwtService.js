@@ -15,9 +15,8 @@ class JwtService extends Utils.EventEmitter {
       },
       (err) => {
         return new Promise((resolve, reject) => {
-          
+          console.error(err);
           if (err.response.status === 401){
-            console.error(err);
             this.emit('onAutoLoggout', 'Invalid access token');
             this.logout();
           } else if (err.response.status === 400){
