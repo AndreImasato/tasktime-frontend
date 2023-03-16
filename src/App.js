@@ -28,35 +28,35 @@ axios.defaults.headers.common['Content-Type'] = 'application/json';
 
 function App() {
   return (
-    <Provider store={store}>
-      <SnackbarProvider>
-        <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale="pt-br">
-          <Auth>
-            <ThemeProvider theme={theme}>
-              <BrowserRouter history={history}>
-                <Routes>
-                  <Route exact path="/" element={<Login/>} />
-                  {pageRoutes.map((route, ix) =>
-                    <Route 
-                      key={ix}
-                      exact path={route.path}
-                      element={<ProtectedRoute/>}
-                    >
-                      <Route
+    <ThemeProvider theme={theme}>
+      <Provider store={store}>
+        <SnackbarProvider>
+          <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale="pt-br">
+            <Auth>
+                <BrowserRouter history={history}>
+                  <Routes>
+                    <Route exact path="/" element={<Login/>} />
+                    {pageRoutes.map((route, ix) =>
+                      <Route 
+                        key={ix}
                         exact path={route.path}
-                        element={route.component}
-                      />
-                    </Route>
-                  )}
-                  <Route path="404" element={<Page404/>} />
-                  <Route path="*" element={<Navigate to="404" />} />
-                </Routes>
-              </BrowserRouter>
-            </ThemeProvider>
-          </Auth>
-        </LocalizationProvider>
-      </SnackbarProvider>
-    </Provider>
+                        element={<ProtectedRoute/>}
+                      >
+                        <Route
+                          exact path={route.path}
+                          element={route.component}
+                        />
+                      </Route>
+                    )}
+                    <Route path="404" element={<Page404/>} />
+                    <Route path="*" element={<Navigate to="404" />} />
+                  </Routes>
+                </BrowserRouter>
+            </Auth>
+          </LocalizationProvider>
+        </SnackbarProvider>
+      </Provider>
+    </ThemeProvider>
   );
 }
 
