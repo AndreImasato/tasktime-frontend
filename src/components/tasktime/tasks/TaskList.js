@@ -88,36 +88,44 @@ const TaskList = (props) => {
       >
         Lista de Tarefas
       </Typography>
-      <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="">
-          <TableHead>
-            <TableRow>
-              <TableCell></TableCell>
-              <TableCell>Nome</TableCell>
-              <TableCell>Duração</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {filteredData.length > 0
-              ? (
-                <>
-                  {filteredData.map((task) => (
-                    <TaskItem key={task.public_id} task={task} />
-                  ))}
-                  <TableRow>
-                    <TableCell></TableCell>
-                    <TableCell></TableCell>
-                    <TableCell>{totalParsedTime}</TableCell>
-                  </TableRow>
-                </>
-              )
-              : (<TableRow>
-                <Typography>Nenhuma tarefa!</Typography>
-              </TableRow>)
-            }
-          </TableBody>
-        </Table>
-      </TableContainer>
+      {filteredData.length > 0
+        ? (
+          <TableContainer sx={{ maxHeight: 440 }}>
+            <Table stickyHeader aria-label="">
+              <TableHead>
+                <TableRow>
+                  <TableCell></TableCell>
+                  <TableCell>Nome</TableCell>
+                  <TableCell>Duração</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {filteredData.map((task) => (
+                  <TaskItem key={task.public_id} task={task} />
+                ))}
+                <TableRow>
+                  <TableCell></TableCell>
+                  <TableCell></TableCell>
+                  <TableCell>{totalParsedTime}</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
+        )
+        : (
+          <Typography
+            variant="h6"
+            sx={{ 
+              textAlign: 'center',
+              color: (theme) => theme.palette.grey[600],
+              marginTop: 10,
+              marginBottom: 10
+            }}
+          >
+            Nenhuma tarefa!
+          </Typography>
+        )
+      }
     </Paper>
   )
 }
