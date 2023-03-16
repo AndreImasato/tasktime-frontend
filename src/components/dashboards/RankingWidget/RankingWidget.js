@@ -66,7 +66,7 @@ const RankingWidget = (props) => {
           </Tabs>
           <TabPanel value={tab} index={0}>
             {!projects || _.isEmpty(projects?.series)
-              ? (<Typography variant="h6" textAlign="center">Nenhum projeto para ser exibido no período</Typography>)
+              ? (<Typography variant="h6" sx={{ textAlign: "center", color: (theme) => theme.palette.grey[600] }}>Nenhum projeto para ser exibido no período</Typography>)
               : (
                 <>
                   <Typography textAlign="center" variant="h6">Projetos de Maior Duração</Typography>
@@ -77,7 +77,7 @@ const RankingWidget = (props) => {
           </TabPanel>
           <TabPanel value={tab} index={1}>
             {!tasks || _.isEmpty(tasks?.series)
-              ? (<Typography variant="h6" textAlign="center">Nenhuma tarefa para ser exibida no período</Typography>)
+              ? (<Typography variant="h6" sx={{ textAlign: "center", color: (theme) => theme.palette.grey[600] }}>Nenhuma tarefa para ser exibida no período</Typography>)
               : (
                 <>
                   <Typography textAlign="center" variant="h6">Tarefas de Maior Duração</Typography>

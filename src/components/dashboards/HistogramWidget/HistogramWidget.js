@@ -56,7 +56,7 @@ const HistogramWidget = (props) => {
         >
           <PeriodComparison />
           {(_.isEmpty(timeData[period]) || _.isEmpty(timeData[period].plot_data.series))
-            ? (<Typography variant="h6" sx={{ textAlign: 'center' }}>{"Nenhuma informação disponível"}</Typography>)
+            ? (<Typography variant="h6" sx={{ textAlign: 'center', color: (theme) => theme.palette.grey[600] }}>{"Nenhuma informação disponível"}</Typography>)
             : (<BarChart />)
           }
         </CardContent>
