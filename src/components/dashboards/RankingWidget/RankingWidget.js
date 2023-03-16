@@ -65,25 +65,25 @@ const RankingWidget = (props) => {
             <Tab label="Tarefas" />
           </Tabs>
           <TabPanel value={tab} index={0}>
-            {!!projects
-              ? (
+            {!projects || _.isEmpty(projects?.series)
+              ? (<Typography variant="h6" textAlign="center">Nenhum projeto para ser exibido no período</Typography>)
+              : (
                 <>
                   <Typography textAlign="center" variant="h6">Projetos de Maior Duração</Typography>
                   <DonutChart {...projects} />
                 </>
               )
-              : (<Typography variant="h6" textAlign="center">Nenhum projeto para ser exibido no período</Typography>)
             }
           </TabPanel>
           <TabPanel value={tab} index={1}>
-            {!!tasks
-              ? (
+            {!tasks || _.isEmpty(tasks?.series)
+              ? (<Typography variant="h6" textAlign="center">Nenhuma tarefa para ser exibida no período</Typography>)
+              : (
                 <>
                   <Typography textAlign="center" variant="h6">Tarefas de Maior Duração</Typography>
                   <DonutChart {...tasks} />
                 </>
               )
-              : (<Typography variant="h6" textAlign="center">Nenhuma tarefa para ser exibida no período</Typography>)
             }
           </TabPanel>
         </Box>

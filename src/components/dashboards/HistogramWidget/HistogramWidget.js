@@ -24,7 +24,6 @@ import PeriodComparison from './PeriodComparison';
 const HistogramWidget = (props) => {
   const { timeData, period } = useSelector(({ dashboards }) => dashboards.histogram);
   const dispatch = useDispatch();
-  console.log(_.isEmpty(timeData[period]) || _.isEmpty(timeData[period].plot_data.series))
 
   return (
     <motion.div
