@@ -1,19 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import moment from 'moment';
 import _ from 'lodash';
 
 // MUI components
 import { 
-  Box,
-  Paper,
   Card,
   CardHeader,
   CardContent,
   Typography,
-  CardActions,
   Tabs,
   Tab
 } from '@mui/material';
@@ -24,8 +19,6 @@ import { setPeriod } from 'src/store/slices/dashboards/histogramSlice';
 // Custom imports
 import BarChart from './BarChart';
 import PeriodComparison from './PeriodComparison';
-
-
 
 
 const HistogramWidget = (props) => {
@@ -62,7 +55,10 @@ const HistogramWidget = (props) => {
           sx={{ height: "80%" }}
         >
           <PeriodComparison />
-          <BarChart />
+          {(_.isEmpty(timeData[period]) || _.isEmpty(timeData[period].plot_data.series))
+            ? (<Typography variant="h6" sx={{ textAlign: 'center', color: (theme) => theme.palette.grey[600] }}>{"Nenhuma informação disponível"}</Typography>)
+            : (<BarChart />)
+          }
         </CardContent>
       </Card>
     </motion.div>

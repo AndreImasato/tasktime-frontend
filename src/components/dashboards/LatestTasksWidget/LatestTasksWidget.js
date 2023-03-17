@@ -80,7 +80,7 @@ const LatestTasksWidget = (props) => {
                 </Table>
               </TableContainer>
             )
-            : (<Typography variant="body1">Nenhuma Tarefa Recente</Typography>)
+            : (<Typography variant="h6" sx={{ textAlign: 'center', color: (theme) => theme.palette.grey[600] }}>Nenhuma tarefa recente</Typography>)
           }
         </Box>
 

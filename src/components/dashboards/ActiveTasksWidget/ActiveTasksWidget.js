@@ -62,7 +62,7 @@ const ActiveTasksWidget = (props) => {
                 ))}
               </Carousel>
             )
-            : (<Typography variant="body1">Nenhuma Tarefa em Aberto!</Typography>)
+            : (<Typography variant="h6" sx={{ textAlign: "center", color: (theme) => theme.palette.grey[600] }}>Nenhuma tarefa em aberto!</Typography>)
           }
 
         </Box>
