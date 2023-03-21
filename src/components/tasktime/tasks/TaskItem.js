@@ -16,6 +16,7 @@ import LaunchIcon from '@mui/icons-material/Launch';
 
 // Custom components
 import ConfirmationDialog from 'src/components/ui/ConfirmationDialog';
+import Utils from 'src/utils';
 
 // Reducers
 import { removeTask } from 'src/store/slices/projects/tasksSlice';
@@ -65,7 +66,7 @@ const TaskItem = (props) => {
         </Grid>
       </TableCell>
       <TableCell>{task.name}</TableCell>
-      <TableCell>{task.parsed_duration}</TableCell>
+      <TableCell>{Utils.parseTimeIntervalToString(task.duration)}</TableCell>
       <ConfirmationDialog
         title="Remover Tarefa"
         description="Deseja realmente remover a tarefa?"
