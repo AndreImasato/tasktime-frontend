@@ -15,6 +15,7 @@ import { useTheme } from '@mui/material/styles';
 
 // Reducer imports
 import { setSelectedCycle, setIsAdding } from 'src/store/slices/projects/cyclesSlice';
+import Utils from 'src/utils';
 
 // Custom imports
 import StyledDateTimeDisplay from 'src/components/ui/StyledDateTimeDisplay';
@@ -96,7 +97,7 @@ const CycleItem = (props) => {
         </Grid>
         <Grid item container xs={1} md={1} xl={1} lg={1} sx={{ flexDirection: 'column', justifyContent: 'center' }}>
           <Typography fontWeight="bold">Duração</Typography>
-          <Typography fontWeight="bold">{cycle.parsed_duration}</Typography>
+          <Typography fontWeight="bold">{Utils.parseTimeIntervalToString(cycle.duration)}</Typography>
         </Grid>
       </Grid>
     </ListItem>

@@ -18,6 +18,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 // Custom components
 import ConfirmationDialog from 'src/components/ui/ConfirmationDialog';
+import Utils from 'src/utils';
 
 // Reducers
 import { removeProject } from 'src/store/slices/projects/projectsSlice';
@@ -79,7 +80,7 @@ const ProjectItem = (props) => {
                   marginLeft: 1
                 }}
               >
-                {project.parsed_duration}
+                {Utils.parseTimeIntervalToString(project.duration)}
               </Typography>
             </div>
             <Button 
